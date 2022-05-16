@@ -1,10 +1,27 @@
+import 'package:flutter/material.dart' hide Action;
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
-import 'package:todolist/models.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todolist/repository.dart';
+import 'package:todolist/domain/entity.dart';
+import 'package:todolist/domain/mapper.dart';
 import 'package:todolist/styles/colors.dart';
 import 'package:todolist/widgets/action_form.dart';
 import 'package:todolist/widgets/action_list.dart';
 import 'package:todolist/widgets/app_bar.dart';
+
+// TODO: 스케줄에 따라 리스트 아이템 제거 및 노션 페이지 생성 구현하기
+// void repeatedNotifications() {
+//   var notion = NotionController();
+
+//   var cron = Cron();
+//   cron.schedule(Schedule.parse('*/1 * * * *'), () async {
+//     var actionItems = _actions
+//         .map((action) => notion.checkboxBlock(action.name, action.done))
+//         .toList();
+
+//     await notion.exceute('대충 제목', actionItems);
+//   });
+// }
 
 void main() {
   runApp(const App());
@@ -30,34 +47,17 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
-  final double _horizontalSpace = 16;
+  final actionName = TextEditingController();
 
-  final actionValueController = TextEditingController();
-
-  String getToday() => DateFormat('M월 d일').format(DateTime.now());
+  String getToday() => DateFormat('yyyy.MM.dd').format(DateTime.now());
 
   // 할 일 목록
-  final List<IAction> _actions = List<IAction>.generate(
-    10,
-    (index) => IAction(
-      type: Type.task,
-      name: '할 일 무언가 $index',
-    ),
-  );
+  late List<Action> _actions = [];
 
-  // 할 일 추가
-  void add(String type, String name) =>
-      setState(() => _actions.add(IAction(type: type, name: name)));
-
-  // 할 일 제거
-  void remove(IAction action) => setState(() => _actions.remove(action));
-
-  // 할 일 상태 변경
-  void changeStatus(IAction action) {
-    setState(() {
-      action.changeStatus();
-      _actions.sort();
-    });
+  @override
+  void initState() {
+    super.initState();
+    _loadActions();
   }
 
   @override
@@ -76,8 +76,8 @@ class _MainState extends State<Main> {
               sliver: SliverToBoxAdapter(
                 child: ActionList(
                   actions: _actions,
-                  onCompleted: changeStatus,
-                  onRemoved: remove,
+                  onCompleted: _updateAction,
+                  onRemoved: _removeAction,
                 ),
               ),
             )
@@ -85,28 +85,74 @@ class _MainState extends State<Main> {
           // 하단 인풋
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: _horizontalSpace,
-                vertical: 24,
-              ),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  stops: [0.6, 0.8],
-                  colors: [Colors.black, Colors.transparent],
-                ),
-              ),
-              child: ActionForm(
-                controller: actionValueController,
-                addTask: () => add(Type.task, actionValueController.text),
-                addRoutine: () => add(Type.routine, actionValueController.text),
-              ),
+            child: ActionForm(
+              controller: actionName,
+              onAddTask: () => _addAction(Action(
+                type: ActionType.task,
+                name: actionName.text,
+              )),
+              onAddRoutine: () => _addAction(Action(
+                type: ActionType.routine,
+                name: actionName.text,
+              )),
             ),
           ),
         ]),
       ),
     );
+  }
+
+  // 할 일 불러오기
+  void _loadActions() async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+
+    setState(() {
+      // Load SQLite
+      final str = _pref.getString('actions') ?? '[]';
+      final data = ActionMapper.actionListFromJson(str);
+
+      // Sync Action
+      _actions = data;
+    });
+  }
+
+  // 할 일 추가
+  void _addAction(Action action) async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+
+    setState(() {
+      // Added Action
+      _actions.add(action);
+
+      // Saved SQLite
+      final data = ActionMapper.actionListToJson(_actions);
+      _pref.setString('actions', data);
+    });
+  }
+
+  // 할 일 제거
+  void _removeAction(Action action) async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+
+    setState(() {
+      // Removed Action
+      _actions.remove(action);
+
+      // Saved SQLite
+      final data = ActionMapper.actionListToJson(_actions);
+      _pref.setString('actions', data);
+    });
+  }
+
+  // 할 일 상태 변경
+  void _updateAction(Action action) async {
+    final _pref = await SharedPreferences.getInstance();
+    final repository = ActionRepository(_pref);
+
+    setState(() {
+      action.changeStatus();
+      _actions.sort();
+      repository.save(_actions);
+    });
   }
 }

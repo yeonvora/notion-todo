@@ -1,18 +1,18 @@
+import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:todolist/models.dart';
-import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:todolist/domain/entity.dart';
 import 'package:todolist/styles/colors.dart';
 import 'package:todolist/widgets/common/divider.dart';
 import 'package:todolist/widgets/action_list_item.dart';
 
 // Widget
 class ActionList extends StatelessWidget {
-  final List<IAction> actions;
+  final List<Action> actions;
 
-  final void Function(IAction)? onCompleted;
+  final void Function(Action)? onCompleted;
 
-  final void Function(IAction)? onRemoved;
+  final void Function(Action)? onRemoved;
 
   const ActionList({
     required this.actions,
@@ -20,7 +20,7 @@ class ActionList extends StatelessWidget {
     this.onRemoved,
   });
 
-  handleAction(IAction action, dynamic callback) {
+  handleAction(Action action, dynamic callback) {
     if (callback != null) {
       callback(action);
     }
@@ -35,12 +35,12 @@ class ActionList extends StatelessWidget {
 
       // builder
       elements: actions,
-      groupBy: (IAction action) => action.type,
+      groupBy: (Action action) => action.type,
       groupSeparatorBuilder: (String type) => Padding(
         padding: const EdgeInsets.only(left: 12),
         child: LoasDivider(label: type),
       ),
-      itemBuilder: (BuildContext context, IAction action) {
+      itemBuilder: (BuildContext context, Action action) {
         return Slidable(
           key: Key(action.name),
           child: ActionListItem(

@@ -1,24 +1,25 @@
-class Type {
+class ActionType {
+  // 단기적 할 일
   static const String task = 'Task';
+
+  // 정기적 할 일
   static const String routine = 'Routine';
 }
 
-class IAction extends Comparable {
-  String type;
+class Action extends Comparable {
+  final String type;
 
   String name;
 
-  bool done = false;
+  bool done;
 
-  IAction({
+  Action({
     required this.type,
     required this.name,
-    bool? done,
+    this.done = false,
   });
 
-  void rename(String name) {
-    this.name = name;
-  }
+  // Domain events
 
   void changeStatus() {
     done = !done;
@@ -37,4 +38,18 @@ class IAction extends Comparable {
 
     return primary;
   }
+
+  // Domain generate
+
+  factory Action.fromMap(Map<String, dynamic> json) => Action(
+        type: json["type"],
+        name: json["name"],
+        done: json["done"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "type": type,
+        "name": name,
+        "done": done,
+      };
 }

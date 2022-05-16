@@ -22,7 +22,6 @@ class ActionListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      dense: true,
       contentPadding: const EdgeInsets.only(left: 12),
       title: LoasText(
         title,

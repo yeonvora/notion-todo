@@ -15,6 +15,9 @@ dependencies:
   flutter_slidable: ^1.2.0
   grouped_list: ^4.2.0
   flutter_remix: ^0.0.3
+  cron: ^0.5.0
+  http: ^0.13.4
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

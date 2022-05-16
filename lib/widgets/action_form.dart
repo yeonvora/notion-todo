@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/styles/colors.dart';
-import 'package:todolist/widgets/add_button.dart';
+import 'package:todolist/styles/sizes.dart';
+import 'package:todolist/widgets/common/icon.dart';
 
 class ActionForm extends StatefulWidget {
   final TextEditingController controller;
 
-  final VoidCallback addTask;
+  final VoidCallback onAddTask;
 
-  final VoidCallback addRoutine;
+  final VoidCallback onAddRoutine;
 
   const ActionForm({
     required this.controller,
-    required this.addTask,
-    required this.addRoutine,
+    required this.onAddTask,
+    required this.onAddRoutine,
   });
 
   @override
@@ -23,6 +24,17 @@ class _ActionFormState extends State<ActionForm> {
   late FocusNode focusNode;
 
   void _handleEvent(callback) {
+    // Focus 상태가 아닐 경우
+    if (!focusNode.hasFocus) {
+      focusNode.requestFocus();
+      return;
+    }
+
+    // Input text가 없을 경우
+    if (widget.controller.text == '') {
+      return;
+    }
+
     callback();
     widget.controller.clear();
     focusNode.unfocus();
@@ -42,13 +54,29 @@ class _ActionFormState extends State<ActionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Flexible(child: buildInput(widget.controller)),
-        focusNode.hasFocus
-            ? buildButton(widget.addTask, widget.addRoutine)
-            : const SizedBox(),
-      ],
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 24,
+      ),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          stops: [0, 0.8],
+          colors: [Colors.black, Colors.transparent],
+        ),
+      ),
+      child: Row(
+        children: [
+          Flexible(child: buildInput(widget.controller)),
+          buildAddButton(
+            widget.controller,
+            widget.onAddTask,
+            widget.onAddRoutine,
+          ),
+        ],
+      ),
     );
   }
 
@@ -77,7 +105,8 @@ class _ActionFormState extends State<ActionForm> {
     );
   }
 
-  Widget buildButton(
+  Widget buildAddButton(
+    TextEditingController controller,
     VoidCallback addTask,
     VoidCallback addRoutine,
   ) {
@@ -86,9 +115,18 @@ class _ActionFormState extends State<ActionForm> {
       width: 48,
       height: 48,
       child: FittedBox(
-        child: AddButton(
-          onPressed: () => _handleEvent(addTask),
-          onLongPressed: () => _handleEvent(addRoutine),
+        child: GestureDetector(
+          onLongPress: () => _handleEvent(addRoutine),
+          child: FloatingActionButton(
+            elevation: 0,
+            backgroundColor: CommonColors.brand,
+            child: const LoasIcon(
+              FlutterRemix.add_line,
+              size: IconSizes.large,
+              color: Colors.white,
+            ),
+            onPressed: () => _handleEvent(addTask),
+          ),
         ),
       ),
     );
