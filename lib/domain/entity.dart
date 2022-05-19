@@ -6,7 +6,7 @@ class ActionType {
   static const String routine = 'Routine';
 }
 
-class Action extends Comparable {
+class Action {
   final String type;
 
   String name;
@@ -38,25 +38,4 @@ class Action extends Comparable {
         "name": name,
         "done": done,
       };
-
-  // Override
-
-  @override
-  String toString() {
-    return '{name: $name, salary: $done}';
-  }
-
-  @override
-  int compareTo(other) {
-    // 작업이 아직 안 끝났다면 위로
-    // 컨텍스트에서 이름은 오름차순으로
-    int primary = done.toString().compareTo(other.done.toString());
-    int secondary = name.compareTo(other.name);
-
-    if (primary == 0) {
-      return secondary;
-    }
-
-    return primary;
-  }
 }

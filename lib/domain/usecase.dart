@@ -46,7 +46,6 @@ class ActionUseCase {
   // 할 일 상태 변경
   void updateAction(Action action) {
     action.changeStatus();
-    actions.sort();
     repository.save(actions);
   }
 }
