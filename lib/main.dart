@@ -1,30 +1,49 @@
+import 'package:cron/cron.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todolist/repository.dart';
+import 'package:todolist/api/notion.dart';
 import 'package:todolist/domain/entity.dart';
-import 'package:todolist/domain/mapper.dart';
+import 'package:todolist/domain/repository.dart';
+import 'package:todolist/domain/usecase.dart';
 import 'package:todolist/styles/colors.dart';
 import 'package:todolist/widgets/action_form.dart';
 import 'package:todolist/widgets/action_list.dart';
 import 'package:todolist/widgets/app_bar.dart';
 
-// TODO: 스케줄에 따라 리스트 아이템 제거 및 노션 페이지 생성 구현하기
-// void repeatedNotifications() {
-//   var notion = NotionController();
-
-//   var cron = Cron();
-//   cron.schedule(Schedule.parse('*/1 * * * *'), () async {
-//     var actionItems = _actions
-//         .map((action) => notion.checkboxBlock(action.name, action.done))
-//         .toList();
-
-//     await notion.exceute('대충 제목', actionItems);
-//   });
-// }
-
 void main() {
   runApp(const App());
+
+  scheduleTask();
+}
+
+// 할 일 목록
+List<Action> _actions = [];
+
+String getToday() => DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+void scheduleTask() {
+  final cron = Cron();
+  final notion = NotionController();
+
+  /**
+   * 하루 단위로 작업 실행
+   */
+  cron.schedule(Schedule.parse('* * */1 * *'), () async {
+    // 블록으로 변환
+    var actionBlock = _actions
+        .map((action) => checkboxBlock(action.name, action.done))
+        .toList();
+
+    // 노션 페이지 생성
+    final today = getToday();
+    await notion.createPage(today, actionBlock);
+
+    // 끝낸 일 제거
+    final pref = await SharedPreferences.getInstance();
+    final usecase = ActionUseCase(_actions, ActionRepository(pref));
+    usecase.cleanActions();
+  });
 }
 
 class App extends StatelessWidget {
@@ -48,11 +67,6 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   final actionName = TextEditingController();
-
-  String getToday() => DateFormat('yyyy.MM.dd').format(DateTime.now());
-
-  // 할 일 목록
-  late List<Action> _actions = [];
 
   @override
   void initState() {
@@ -104,55 +118,43 @@ class _MainState extends State<Main> {
 
   // 할 일 불러오기
   void _loadActions() async {
-    SharedPreferences _pref = await SharedPreferences.getInstance();
+    final _pref = await SharedPreferences.getInstance();
 
     setState(() {
-      // Load SQLite
-      final str = _pref.getString('actions') ?? '[]';
-      final data = ActionMapper.actionListFromJson(str);
+      final usecase = ActionUseCase(_actions, ActionRepository(_pref));
+      final actions = usecase.loadActions();
 
-      // Sync Action
-      _actions = data;
+      _actions = actions;
     });
   }
 
   // 할 일 추가
   void _addAction(Action action) async {
-    SharedPreferences _pref = await SharedPreferences.getInstance();
+    final _pref = await SharedPreferences.getInstance();
 
     setState(() {
-      // Added Action
-      _actions.add(action);
-
-      // Saved SQLite
-      final data = ActionMapper.actionListToJson(_actions);
-      _pref.setString('actions', data);
+      final usecase = ActionUseCase(_actions, ActionRepository(_pref));
+      usecase.addAction(action);
     });
   }
 
   // 할 일 제거
   void _removeAction(Action action) async {
-    SharedPreferences _pref = await SharedPreferences.getInstance();
+    final _pref = await SharedPreferences.getInstance();
 
     setState(() {
-      // Removed Action
-      _actions.remove(action);
-
-      // Saved SQLite
-      final data = ActionMapper.actionListToJson(_actions);
-      _pref.setString('actions', data);
+      final usecase = ActionUseCase(_actions, ActionRepository(_pref));
+      usecase.removeAction(action);
     });
   }
 
   // 할 일 상태 변경
   void _updateAction(Action action) async {
     final _pref = await SharedPreferences.getInstance();
-    final repository = ActionRepository(_pref);
 
     setState(() {
-      action.changeStatus();
-      _actions.sort();
-      repository.save(_actions);
+      final usecase = ActionUseCase(_actions, ActionRepository(_pref));
+      usecase.updateAction(action);
     });
   }
 }

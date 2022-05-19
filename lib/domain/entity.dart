@@ -19,10 +19,31 @@ class Action extends Comparable {
     this.done = false,
   });
 
-  // Domain events
+  // Events
 
   void changeStatus() {
     done = !done;
+  }
+
+  // Generate
+
+  factory Action.fromMap(Map<String, dynamic> json) => Action(
+        type: json["type"],
+        name: json["name"],
+        done: json["done"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "type": type,
+        "name": name,
+        "done": done,
+      };
+
+  // Override
+
+  @override
+  String toString() {
+    return '{name: $name, salary: $done}';
   }
 
   @override
@@ -38,18 +59,4 @@ class Action extends Comparable {
 
     return primary;
   }
-
-  // Domain generate
-
-  factory Action.fromMap(Map<String, dynamic> json) => Action(
-        type: json["type"],
-        name: json["name"],
-        done: json["done"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "type": type,
-        "name": name,
-        "done": done,
-      };
 }
