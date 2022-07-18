@@ -4,14 +4,14 @@ import 'package:todolist/styles/colors.dart';
 
 export 'package:flutter_remix/flutter_remix.dart';
 
-class LoasIcon extends StatelessWidget {
+class TodoIcon extends StatelessWidget {
   final IconData? icon;
 
   final double? size;
 
   final Color? color;
 
-  const LoasIcon(
+  const TodoIcon(
     this.icon, {
     this.size = IconSizes.medium,
     this.color = FontColors.secondary,

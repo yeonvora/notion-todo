@@ -1,50 +1,20 @@
-import 'package:cron/cron.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todolist/api/notion.dart';
 import 'package:todolist/domain/entity.dart';
 import 'package:todolist/domain/repository.dart';
 import 'package:todolist/domain/usecase.dart';
 import 'package:todolist/styles/colors.dart';
+import 'package:todolist/utils/get_today.dart';
 import 'package:todolist/widgets/action_form.dart';
 import 'package:todolist/widgets/action_list.dart';
 import 'package:todolist/widgets/app_bar.dart';
 
 void main() {
   runApp(const App());
-
-  scheduleTask();
 }
 
 // 할 일 목록
 List<Action> _actions = [];
-
-String getToday() => DateFormat('yyyy-MM-dd').format(DateTime.now());
-
-void scheduleTask() {
-  final cron = Cron();
-  final notion = NotionController();
-
-  /**
-   * 하루 단위로 작업 실행
-   */
-  cron.schedule(Schedule.parse('* * */1 * *'), () async {
-    // 블록으로 변환
-    var actionBlock = _actions
-        .map((action) => checkboxBlock(action.name, action.done))
-        .toList();
-
-    // 노션 페이지 생성
-    final today = getToday();
-    await notion.createPage(today, actionBlock);
-
-    // 끝낸 일 제거
-    final pref = await SharedPreferences.getInstance();
-    final usecase = ActionUseCase(_actions, ActionRepository(pref));
-    usecase.cleanActions();
-  });
-}
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -84,7 +54,7 @@ class _MainState extends State<Main> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(children: [
           CustomScrollView(slivers: [
-            LoasAppBar(titles: today),
+            TodoAppBar(titles: today),
             SliverPadding(
               padding: const EdgeInsets.only(top: 16, bottom: 120),
               sliver: SliverToBoxAdapter(

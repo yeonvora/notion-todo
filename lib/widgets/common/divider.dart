@@ -3,10 +3,10 @@ import 'package:todolist/styles/colors.dart';
 import 'package:todolist/styles/sizes.dart';
 import 'package:todolist/widgets/common/text.dart';
 
-class LoasDivider extends StatelessWidget {
+class TodoDivider extends StatelessWidget {
   final String label;
 
-  const LoasDivider({required this.label});
+  const TodoDivider({required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class LoasDivider extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 4),
-          child: LoasText(label, size: FontSizes.caption),
+          child: TodoText(label, size: FontSizes.caption),
         ),
         const Expanded(
           child: Divider(

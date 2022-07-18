@@ -38,7 +38,7 @@ class ActionList extends StatelessWidget {
       groupBy: (Action action) => action.type,
       groupSeparatorBuilder: (String type) => Padding(
         padding: const EdgeInsets.only(left: 12),
-        child: LoasDivider(label: type),
+        child: TodoDivider(label: type),
       ),
       itemBuilder: (BuildContext context, Action action) {
         return Slidable(

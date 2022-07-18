@@ -23,7 +23,7 @@ class ActionListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.only(left: 12),
-      title: LoasText(
+      title: TodoText(
         title,
         color: done ? FontColors.hint : FontColors.primary,
       ),

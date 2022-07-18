@@ -3,12 +3,12 @@ import 'package:todolist/styles/sizes.dart';
 import 'package:todolist/styles/colors.dart';
 import 'package:todolist/widgets/common/text.dart';
 
-class LoasAppBar extends StatelessWidget {
+class TodoAppBar extends StatelessWidget {
   final String titles;
 
   final Widget? avatar;
 
-  const LoasAppBar({
+  const TodoAppBar({
     required this.titles,
     this.avatar,
   });
@@ -30,7 +30,7 @@ class LoasAppBar extends StatelessWidget {
 
     return FlexibleSpaceBar(
       centerTitle: true,
-      title: LoasText(
+      title: TodoText(
         titles,
         size: FontSizes.title,
         color: FontColors.primary,

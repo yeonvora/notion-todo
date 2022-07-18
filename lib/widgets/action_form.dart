@@ -120,7 +120,7 @@ class _ActionFormState extends State<ActionForm> {
           child: FloatingActionButton(
             elevation: 0,
             backgroundColor: CommonColors.brand,
-            child: const LoasIcon(
+            child: const TodoIcon(
               FlutterRemix.add_line,
               size: IconSizes.large,
               color: Colors.white,

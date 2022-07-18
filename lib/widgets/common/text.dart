@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:todolist/styles/sizes.dart';
 import 'package:todolist/styles/colors.dart';
 
-class LoasText extends StatelessWidget {
+class TodoText extends StatelessWidget {
   final String? text;
 
   final double? size;
@@ -21,7 +21,7 @@ class LoasText extends StatelessWidget {
 
   final TextStyle? style;
 
-  const LoasText(
+  const TodoText(
     this.text, {
     this.size = FontSizes.body,
     this.color = FontColors.secondary,
