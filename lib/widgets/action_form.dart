@@ -69,7 +69,12 @@ class _ActionFormState extends State<ActionForm> {
       ),
       child: Row(
         children: [
-          Flexible(child: buildInput(widget.controller)),
+          Flexible(
+            child: buildInput(
+              widget.controller,
+              widget.onAddTask,
+            ),
+          ),
           buildAddButton(
             widget.controller,
             widget.onAddTask,
@@ -80,10 +85,14 @@ class _ActionFormState extends State<ActionForm> {
     );
   }
 
-  Widget buildInput(TextEditingController controller) {
+  Widget buildInput(
+    TextEditingController controller,
+    VoidCallback addTask,
+  ) {
     return TextField(
       focusNode: focusNode,
       controller: controller,
+      textInputAction: TextInputAction.done,
       style: const TextStyle(
         fontSize: 14,
         color: Colors.white70,
@@ -102,6 +111,7 @@ class _ActionFormState extends State<ActionForm> {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
+      onSubmitted: (val) => _handleEvent(addTask),
     );
   }
 
