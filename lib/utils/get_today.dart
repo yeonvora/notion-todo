@@ -1,3 +1,4 @@
 import 'package:intl/intl.dart';
 
-String getToday() => DateFormat('yyyy-MM-dd').format(DateTime.now());
+String getToday([String? format]) =>
+    DateFormat(format ?? 'yyyy-MM-dd').format(DateTime.now());
