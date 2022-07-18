@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/styles/colors.dart';
+import 'package:todolist/widgets/common/icon.dart';
 
 import 'package:todolist/widgets/common/text.dart';
 
@@ -22,7 +23,14 @@ class ActionListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      dense: true,
+      minLeadingWidth: 0,
+      horizontalTitleGap: 8,
       contentPadding: const EdgeInsets.only(left: 12),
+      leading: TodoIcon(
+        done ? FlutterRemix.checkbox_fill : FlutterRemix.checkbox_blank_line,
+        color: done ? FontColors.secondary : FontColors.hint,
+      ),
       title: TodoText(
         title,
         color: done ? FontColors.hint : FontColors.primary,

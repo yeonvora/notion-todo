@@ -15,12 +15,12 @@ class TodoDivider extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 4),
-          child: TodoText(label, size: FontSizes.caption),
+          child: TodoText(label, size: FontSizes.body, strong: true),
         ),
         const Expanded(
           child: Divider(
             height: 40,
-            thickness: 0.8,
+            thickness: 1.0,
             color: CommonColors.divider,
           ),
         ),
