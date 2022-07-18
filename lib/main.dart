@@ -4,7 +4,6 @@ import 'package:todolist/domain/entity.dart';
 import 'package:todolist/domain/repository.dart';
 import 'package:todolist/domain/usecase.dart';
 import 'package:todolist/styles/colors.dart';
-import 'package:todolist/utils/get_today.dart';
 import 'package:todolist/widgets/action_form.dart';
 import 'package:todolist/widgets/action_list.dart';
 import 'package:todolist/widgets/app_bar.dart';
@@ -46,15 +45,13 @@ class _MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
-    String today = getToday();
-
     return Scaffold(
       backgroundColor: CommonColors.background,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(children: [
           CustomScrollView(slivers: [
-            TodoAppBar(titles: today),
+            const TodoAppBar(titles: "뛰어난 메이커 추구하기"),
             SliverPadding(
               padding: const EdgeInsets.only(top: 16, bottom: 120),
               sliver: SliverToBoxAdapter(
