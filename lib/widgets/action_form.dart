@@ -57,7 +57,7 @@ class _ActionFormState extends State<ActionForm> {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
-        vertical: 24,
+        vertical: 16,
       ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -111,7 +111,7 @@ class _ActionFormState extends State<ActionForm> {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      onSubmitted: (val) => _handleEvent(addTask),
+      onSubmitted: (_) => _handleEvent(addTask),
     );
   }
 

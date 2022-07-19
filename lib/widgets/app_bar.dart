@@ -23,7 +23,7 @@ class TodoAppBar extends StatelessWidget {
       expandedHeight: 240,
       backgroundColor: CommonColors.brand,
       flexibleSpace: FlexibleSpaceBar(
-        collapseMode: CollapseMode.pin,
+        // collapseMode: CollapseMode.pin,
         background: Stack(
           children: [
             Container(

@@ -19,5 +19,9 @@ dynamic checkboxBlock(String name, bool checked) {
 
 /// Divider
 dynamic dividerBlock() {
-  return {"type": "divider"};
+  return {
+    "object": "block",
+    "type": "divider",
+    "divider": {},
+  };
 }
