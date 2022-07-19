@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:todolist/config/config.dart';
-import 'package:todolist/utils/get_today.dart';
 
 class NotionController {
   static final header = {
@@ -10,7 +9,10 @@ class NotionController {
     'Notion-Version': '2022-06-28',
   };
 
-  Future createPage(List<dynamic> children) async {
+  Future createPage({
+    required String title,
+    required List<dynamic> children,
+  }) async {
     final uri = Uri.https('api.notion.com', '/v1/pages');
 
     await http.post(
@@ -22,7 +24,7 @@ class NotionController {
           "Date": {
             "title": [
               {
-                "text": {"content": "테스트 ### ${getToday('yyyy-MM-dd')}"}
+                "text": {"content": title}
               }
             ]
           }

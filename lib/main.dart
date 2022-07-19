@@ -6,6 +6,7 @@ import 'package:todolist/domain/entity.dart';
 import 'package:todolist/domain/repository.dart';
 import 'package:todolist/domain/usecase.dart';
 import 'package:todolist/styles/colors.dart';
+import 'package:todolist/utils/get_today.dart';
 import 'package:todolist/utils/notion_block.dart';
 import 'package:todolist/widgets/action_form.dart';
 import 'package:todolist/widgets/action_list.dart';
@@ -108,11 +109,14 @@ class _MainState extends State<Main> {
         .toList();
 
     // 노션 페이지 생성
-    await controller.createPage([
-      ...actionBlock(ActionType.routine),
-      dividerBlock(),
-      ...actionBlock(ActionType.task),
-    ]);
+    await controller.createPage(
+      title: "테스트 ### ${getToday('yyyy-MM-dd')}",
+      children: [
+        ...actionBlock(ActionType.routine),
+        dividerBlock(),
+        ...actionBlock(ActionType.task),
+      ],
+    );
 
     // 끝낸 일 제거
     setState(() {
