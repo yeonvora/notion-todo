@@ -15,20 +15,24 @@ class ActionUseCase {
     return repository.load();
   }
 
-  // 할 일 정리하기
-  // 루틴은 그대로, 완료된 테스크는 제거
-  void cleanActions() {
-    var data = actions
+  // 할 일 초기화
+  List<Action> initializeActions() {
+    final data = actions
+        // [Routine]은 그대로
         .map((action) {
           if (action.type == ActionType.routine) {
             action.done = false;
           }
+
           return action;
         })
-        .where((action) => !action.done)
+        // 완료된 [Task]은 필터링
+        .where((action) => action.done == false)
         .toList();
 
     repository.save(data);
+
+    return data;
   }
 
   // 할 일 추가
