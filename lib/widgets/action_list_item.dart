@@ -29,7 +29,7 @@ class ActionListItem extends StatelessWidget {
       contentPadding: const EdgeInsets.only(left: 12),
       leading: TodoIcon(
         done ? FlutterRemix.checkbox_fill : FlutterRemix.checkbox_blank_line,
-        color: done ? FontColors.secondary : FontColors.hint,
+        color: FontColors.hint,
       ),
       title: TodoText(
         title,
