@@ -1,16 +1,13 @@
-# todolist
+![cover](./assets/cover.png)
 
-A new Flutter project.
+# Noti
 
-## Getting Started
+오늘 할 일을 노션 데이터베이스에 동기화해주는 서비스
 
-This project is a starting point for a Flutter application.
+<br/>
 
-A few resources to get you started if this is your first Flutter project:
+**사용방법**
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. [Notion Config](./lib/notion/notion_config.exam.dart) 설정
+2. 취향대로 [제목, 배경화면](./lib/styles/brand.dart) 설정
+3. [flutter 설치](https://docs.flutter.dev/get-started) 후 실행

@@ -1,15 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-class SystemColors {
-  static const Color info = Color(0xFF2F70E1);
-
-  static const Color success = Color(0xFF53D76A);
-
-  static const Color warning = Color(0xFFDDAA3B);
-
-  static const Color danger = Color(0xFFE5000F);
-}
-
 class CommonColors {
   static const Color brand = Color(0xFF1C2129);
 

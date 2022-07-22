@@ -6,6 +6,7 @@ import 'package:todolist/domain/action_repository.dart';
 import 'package:todolist/domain/action_service.dart';
 import 'package:todolist/notion/notion_api.dart';
 import 'package:todolist/notion/notion_block.dart';
+import 'package:todolist/styles/brand.dart';
 import 'package:todolist/styles/colors.dart';
 import 'package:todolist/utils/get_today.dart';
 import 'package:todolist/widgets/action_form.dart';
@@ -68,18 +69,15 @@ class _MainState extends State<Main> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(children: [
           CustomScrollView(slivers: [
-            TodoAppBar(
-                titles: "뛰어난 메이커 추구하기",
-                background: 'https://bit.ly/3okVeyL',
-                actions: [
-                  IconButton(
-                    icon: const Icon(
-                      FlutterRemix.refresh_line,
-                      color: Colors.white,
-                    ),
-                    onPressed: synchronizeNotionPage,
-                  )
-                ]),
+            TodoAppBar(titles: title, background: coverImage, actions: [
+              IconButton(
+                icon: const Icon(
+                  FlutterRemix.refresh_line,
+                  color: Colors.white,
+                ),
+                onPressed: synchronizeNotionPage,
+              )
+            ]),
             SliverPadding(
               padding: const EdgeInsets.only(top: 16, bottom: 120),
               sliver: SliverToBoxAdapter(

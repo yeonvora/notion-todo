@@ -2,7 +2,6 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:todolist/domain/action_entity.dart';
-import 'package:todolist/styles/colors.dart';
 import 'package:todolist/widgets/common/divider.dart';
 import 'package:todolist/widgets/action_list_item.dart';
 
@@ -54,7 +53,7 @@ class ActionList extends StatelessWidget {
             children: [
               SlidableAction(
                 icon: Icons.delete,
-                backgroundColor: SystemColors.danger,
+                backgroundColor: Colors.red,
                 onPressed: (BuildContext context) =>
                     handleAction(action, onRemoved),
               ),
