@@ -1,7 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todolist/domain/entity.dart';
-import 'package:todolist/domain/mapper.dart';
+import 'package:todolist/domain/action_entity.dart';
+import 'package:todolist/domain/action_mapper.dart';
 
+// Interface
 abstract class ActionRepositoryPort {
   // DB의 모든 데이터를 불러옴
   List<Action> load();
@@ -10,6 +11,7 @@ abstract class ActionRepositoryPort {
   void save(List<Action> actions);
 }
 
+// Implementation
 class ActionRepository implements ActionRepositoryPort {
   final String name = 'acitons';
 
@@ -20,14 +22,14 @@ class ActionRepository implements ActionRepositoryPort {
   @override
   List<Action> load() {
     final str = pref.getString(name) ?? '[]';
-    final actions = ActionMapper.actionListFromJson(str);
+    final actions = ActionMapper.toDomainList(str);
 
     return actions;
   }
 
   @override
   void save(List<Action> actions) {
-    final data = ActionMapper.actionListToJson(actions);
+    final data = ActionMapper.toJsonList(actions);
     pref.setString(name, data);
   }
 }

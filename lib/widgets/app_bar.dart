@@ -7,21 +7,24 @@ import 'package:todolist/widgets/common/text.dart';
 class TodoAppBar extends StatelessWidget {
   final String titles;
 
-  final Widget? avatar;
+  final String background;
+
+  final List<Widget>? actions;
 
   const TodoAppBar({
     required this.titles,
-    this.avatar,
+    required this.background,
+    this.actions,
   });
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
+      actions: actions,
       elevation: 0,
-      toolbarHeight: 0,
       expandedHeight: 240,
-      backgroundColor: CommonColors.brand,
+      backgroundColor: Colors.transparent,
       flexibleSpace: FlexibleSpaceBar(
         // collapseMode: CollapseMode.pin,
         background: Stack(
@@ -40,13 +43,11 @@ class TodoAppBar extends StatelessWidget {
                       0.8,
                     ]),
               ),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'https://t1.daumcdn.net/cfile/tistory/9942CA415FCA28B40A',
-                  ),
+                  image: NetworkImage(background),
                   fit: BoxFit.cover,
-                  alignment: Alignment(0, -0.5),
+                  alignment: const Alignment(0, -0.5),
                 ),
               ),
             ),
