@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/styles/colors.dart';
-import 'package:todolist/widgets/common/icon.dart';
+import 'package:noti/styles/colors.dart';
+import 'package:noti/widgets/common/icon.dart';
 
-import 'package:todolist/widgets/common/text.dart';
+import 'package:noti/widgets/common/text.dart';
 
 class ActionListItem extends StatelessWidget {
   final bool done;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/styles/sizes.dart';
-import 'package:todolist/styles/colors.dart';
-import 'package:todolist/utils/get_today.dart';
-import 'package:todolist/widgets/common/text.dart';
+import 'package:noti/styles/sizes.dart';
+import 'package:noti/styles/colors.dart';
+import 'package:noti/utils/get_today.dart';
+import 'package:noti/widgets/common/text.dart';
 
 class TodoAppBar extends StatelessWidget {
   final String titles;

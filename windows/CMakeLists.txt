@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(todolist LANGUAGES CXX)
+project(noti LANGUAGES CXX)
 
-set(BINARY_NAME "todolist")
+set(BINARY_NAME "noti")
 
 cmake_policy(SET CMP0063 NEW)
 

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todolist/domain/action_entity.dart';
-import 'package:todolist/domain/action_repository.dart';
-import 'package:todolist/domain/action_service.dart';
-import 'package:todolist/notion/notion_api.dart';
-import 'package:todolist/notion/notion_block.dart';
-import 'package:todolist/styles/brand.dart';
-import 'package:todolist/styles/colors.dart';
-import 'package:todolist/utils/get_today.dart';
-import 'package:todolist/widgets/action_form.dart';
-import 'package:todolist/widgets/action_list.dart';
-import 'package:todolist/widgets/app_bar.dart';
-import 'package:todolist/widgets/common/icon.dart';
+import 'package:noti/domain/action_entity.dart';
+import 'package:noti/domain/action_repository.dart';
+import 'package:noti/domain/action_service.dart';
+import 'package:noti/notion/notion_api.dart';
+import 'package:noti/notion/notion_block.dart';
+import 'package:noti/styles/brand.dart';
+import 'package:noti/styles/colors.dart';
+import 'package:noti/utils/get_today.dart';
+import 'package:noti/widgets/action_form.dart';
+import 'package:noti/widgets/action_list.dart';
+import 'package:noti/widgets/app_bar.dart';
+import 'package:noti/widgets/common/icon.dart';
 
 GetIt sl = GetIt.instance;
 
@@ -36,7 +36,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Todolist',
+      title: 'noti',
       home: Main(),
     );
   }

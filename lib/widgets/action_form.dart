@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/styles/colors.dart';
-import 'package:todolist/styles/sizes.dart';
-import 'package:todolist/widgets/common/icon.dart';
+import 'package:noti/styles/colors.dart';
+import 'package:noti/styles/sizes.dart';
+import 'package:noti/widgets/common/icon.dart';
 
 class ActionForm extends StatefulWidget {
   final TextEditingController controller;

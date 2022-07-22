@@ -1,5 +1,5 @@
-import 'package:todolist/domain/action_entity.dart';
-import 'package:todolist/domain/action_repository.dart';
+import 'package:noti/domain/action_entity.dart';
+import 'package:noti/domain/action_repository.dart';
 
 /// Interface
 abstract class ActionUsecase {

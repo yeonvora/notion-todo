@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todolist/domain/action_entity.dart';
-import 'package:todolist/domain/action_mapper.dart';
+import 'package:noti/domain/action_entity.dart';
+import 'package:noti/domain/action_mapper.dart';
 
 // Interface
 abstract class ActionRepositoryPort {

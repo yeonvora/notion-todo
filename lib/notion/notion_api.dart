@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:todolist/notion/notion_config.dart';
+import 'package:noti/notion/notion_config.dart';
 
 /// [Notion API Reference](https://developers.notion.com/reference)
 class NotionAPI {
