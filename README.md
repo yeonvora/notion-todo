@@ -9,9 +9,12 @@
 
 **사용 방법**
 
-1. [Notion Config](./lib/notion/notion_config.exam.dart) 설정
-2. 취향대로 [제목, 배경화면](./lib/styles/brand.dart) 설정
-3. [flutter 설치](https://docs.flutter.dev/get-started) 후 실행
+1. Notion DB 생성
+2. 제목 속성 이름을 Date로 변경
+3. [Notion API Guide](https://developers.notion.com/docs/getting-started)에 따라 진행
+4. [Notion Config](./lib/notion/notion_config.exam.dart) 수정
+5. 취향대로 [제목, 배경화면](./lib/styles/brand.dart) 설정
+6. [flutter 설치](https://docs.flutter.dev/get-started) 후 실행
 
 <br/>
 

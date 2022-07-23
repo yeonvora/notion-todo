@@ -13,6 +13,8 @@ import 'package:noti/widgets/action_form.dart';
 import 'package:noti/widgets/action_list.dart';
 import 'package:noti/widgets/app_bar.dart';
 import 'package:noti/widgets/common/icon.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 GetIt sl = GetIt.instance;
 
@@ -75,7 +77,13 @@ class _MainState extends State<Main> {
                   FlutterRemix.refresh_line,
                   color: Colors.white,
                 ),
-                onPressed: synchronizeNotionPage,
+                onPressed: () async {
+                  await synchronizeNotionPage()
+                      .then((_) => showTopSnackBar(context,
+                          const CustomSnackBar.success(message: '노션에 추가했어요')))
+                      .catchError((_) => showTopSnackBar(context,
+                          const CustomSnackBar.error(message: '문제가 생겼어요')));
+                },
               )
             ]),
             SliverPadding(
