@@ -1,5 +1,12 @@
-import 'package:noti/domain/action_entity.dart';
-import 'package:noti/domain/action_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:noti/features/action/domain/action_entity.dart';
+import 'package:noti/features/action/data/action_repository.dart';
+
+// 🟡 Riverpod Dependency
+final actionServiceProvider = Provider<ActionUsecase>((ref) {
+  final repository = ref.watch(actionRepositoryProvider);
+  return ActionService(repository);
+});
 
 /// Interface
 abstract class ActionUsecase {
@@ -58,6 +65,8 @@ class ActionService implements ActionUsecase {
 
   @override
   List<Action> initializeActions() {
+    print('dsadad');
+
     final actions = getActions();
 
     final initialize = actions

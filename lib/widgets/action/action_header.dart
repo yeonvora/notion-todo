@@ -4,16 +4,16 @@ import 'package:noti/constants/widget.dart';
 import 'package:noti/constants/sizes.dart';
 import 'package:noti/constants/colors.dart';
 import 'package:noti/utils/get_today.dart';
-import 'package:noti/widgets/common/text.dart';
+import 'package:noti/widgets/_common/text.dart';
 
-class TodoAppBar extends StatelessWidget {
+class ActionHeader extends StatelessWidget {
   final String? title;
 
   final String? background;
 
   final List<Widget>? actions;
 
-  const TodoAppBar({
+  const ActionHeader({
     this.title,
     this.background,
     this.actions,

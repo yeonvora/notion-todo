@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:noti/domain/action_entity.dart';
-import 'package:noti/widgets/common/divider.dart';
-import 'package:noti/widgets/action_list_item.dart';
+import 'package:noti/widgets/_common/divider.dart';
+import 'package:noti/widgets/action/action_list_item.dart';
 
-// Widget
+import 'package:noti/features/action/domain/action_entity.dart';
+
 class ActionList extends StatelessWidget {
   final List<Action> actions;
 

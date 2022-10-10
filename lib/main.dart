@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart' hide Action;
-import 'package:get_it/get_it.dart';
-import 'package:noti/constants/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:noti/domain/action_repository.dart';
-import 'package:noti/domain/action_service.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:noti/constants/colors.dart';
 
-import 'package:noti/screens/home_screen.dart';
-// import 'package:noti/screens/setting_screen.dart';
+import 'package:noti/features/action/presentation/action_screen.dart';
+import 'package:noti/features/profile/presentation/profile_screen.dart';
 
-GetIt sl = GetIt.instance;
-
-Future<void> setup() async {
-  final sharedPreferences = await SharedPreferences.getInstance();
-  sl.registerSingleton<SharedPreferences>(sharedPreferences);
-  sl.registerLazySingleton<ActionRepositoryPort>(() => ActionRepository(sl()));
-  sl.registerLazySingleton<ActionUsecase>(() => ActionService(sl()));
-}
+final sharedPreferencesProvider = Provider<SharedPreferences>((_) => throw UnimplementedError());
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final sharedPrefs = await SharedPreferences.getInstance();
 
-  await setup();
-  runApp(const App());
+  runApp(ProviderScope(
+    overrides: [sharedPreferencesProvider.overrideWithValue(sharedPrefs)],
+    child: const App(),
+  ));
 }
 
 class App extends StatelessWidget {
@@ -31,7 +25,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'noti',
-      home: const HomeScreen(),
       theme: ThemeData(
         fontFamily: 'Pretendard',
         brightness: Brightness.dark,
@@ -41,6 +34,13 @@ class App extends StatelessWidget {
         ),
         scaffoldBackgroundColor: CommonColors.background,
       ),
+
+      // Flutter navigation 1.0
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const ActionScreen(),
+        '/profile': (context) => const ProfileScreen(),
+      },
     );
   }
 }

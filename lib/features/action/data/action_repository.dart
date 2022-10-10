@@ -1,6 +1,14 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:noti/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:noti/domain/action_entity.dart';
-import 'package:noti/domain/action_mapper.dart';
+import 'package:noti/features/action/domain/action_entity.dart';
+import 'package:noti/features/action/data/action_mapper.dart';
+
+// 🟡 Riverpod Dependency
+final actionRepositoryProvider = Provider<ActionRepository>((ref) {
+  final prefs = ref.watch(sharedPreferencesProvider);
+  return ActionRepository(prefs);
+});
 
 // Interface
 abstract class ActionRepositoryPort {

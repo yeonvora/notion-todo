@@ -1,17 +1,24 @@
 import 'dart:io';
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:noti/constants/text.dart';
 import 'package:noti/constants/colors.dart';
 import 'package:noti/constants/sizes.dart';
 import 'package:noti/constants/widget.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:noti/widgets/common/icon.dart';
-import 'package:noti/widgets/common/modal_sheet.dart';
-import 'package:noti/widgets/common/text.dart';
-import 'package:noti/widgets/common/text_field.dart';
+import 'package:noti/features/action/presentation/action_controller.dart';
+import 'package:noti/utils/show_flash_snack_bar.dart';
+import 'package:noti/widgets/_common/icon.dart';
+import 'package:noti/widgets/_common/modal_sheet.dart';
+import 'package:noti/widgets/_common/text.dart';
+import 'package:noti/widgets/_common/text_field.dart';
+import 'package:noti/widgets/profile/title_text_field.dart';
 
-class SettingScreen extends HookWidget {
+class ProfileScreen extends HookConsumerWidget {
+  const ProfileScreen();
+
   Future<File?> pickBackgroundImage() async {
     final ImagePicker _picker = ImagePicker();
     final XFile? picked = await _picker.pickImage(source: ImageSource.gallery);
@@ -39,14 +46,9 @@ class SettingScreen extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final file = useState<File?>(null);
     final titleController = useTextEditingController();
-
-    useEffect(() {
-      titleController.text = 'ㅎㅇ';
-      return null;
-    }, []);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -85,6 +87,32 @@ class SettingScreen extends HookWidget {
             ]),
           ),
         ]),
+        resizeToAvoidBottomInset: true,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(16),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              backgroundColor: CommonColors.brand,
+              minimumSize: const Size.fromHeight(56),
+              textStyle: const TextStyle(
+                fontSize: FontSizes.subHeader,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onPressed: () async {
+              try {
+                await ref.read(actionControllerProvider.notifier).synchronizeAction();
+                showFlashSnackBar(context, snack: FlashBar(content: const Text('노션에 추가했어요')));
+              } catch (error, track) {
+                showFlashSnackBar(context, snack: FlashBar(content: const Text('문제가 생겼어요')));
+                print(track);
+              }
+            },
+            child: const Text('노션 동기화'),
+          ),
+        ),
       ),
     );
   }
@@ -167,48 +195,6 @@ class ConfigNotionModal extends HookWidget {
           onPressed: () => print('submit'),
           child: const Text('설정하기'),
         ),
-      ),
-    );
-  }
-}
-
-class TitleTextField extends StatelessWidget {
-  final TextEditingController? controller;
-
-  final String? hintText;
-
-  final bool? autofocus;
-
-  final void Function(String)? onChange;
-
-  const TitleTextField({
-    this.controller,
-    this.hintText,
-    this.autofocus,
-    this.onChange,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      onChanged: onChange,
-      autofocus: autofocus ?? false,
-      textAlign: TextAlign.center,
-      cursorColor: Colors.white,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 16),
-        hintText: hintText,
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(width: 1, color: CommonColors.divider),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(width: 1.2, color: Colors.white),
-        ),
-      ),
-      style: const TextStyle(
-        fontSize: FontSizes.title,
-        fontWeight: FontWeight.bold,
       ),
     );
   }
