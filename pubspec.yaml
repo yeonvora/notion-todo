@@ -7,17 +7,17 @@ environment:
   sdk: ">=2.16.2 <3.0.0"
 
 dependencies:
+  cron: ^0.5.0
+  flash: ^2.0.5
   flutter:
     sdk: flutter
-  intl: ^0.17.0
-  flutter_slidable: ^1.2.0
-  grouped_list: ^4.2.0
   flutter_remix: ^0.0.3
-  cron: ^0.5.0
-  http: ^0.13.4
-  shared_preferences: ^2.0.15
+  flutter_slidable: ^1.2.0
   get_it: ^7.2.0
-  top_snackbar_flutter: ^2.1.1
+  grouped_list: ^4.2.0
+  http: ^0.13.4
+  intl: ^0.17.0
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_lints: ^1.0.0

@@ -45,7 +45,7 @@ class ActionList extends StatelessWidget {
           child: ActionListItem(
             done: action.done,
             title: action.name,
-            onLongPressed: () => handleAction(action, onCompleted),
+            onPressed: () => handleAction(action, onCompleted),
           ),
           endActionPane: ActionPane(
             extentRatio: 0.2,
@@ -54,8 +54,7 @@ class ActionList extends StatelessWidget {
               SlidableAction(
                 icon: Icons.delete,
                 backgroundColor: Colors.red,
-                onPressed: (BuildContext context) =>
-                    handleAction(action, onRemoved),
+                onPressed: (BuildContext context) => handleAction(action, onRemoved),
               ),
             ],
           ),
