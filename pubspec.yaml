@@ -11,11 +11,14 @@ dependencies:
   flash: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_hooks: ^0.18.5+1
   flutter_remix: ^0.0.3
   flutter_slidable: ^1.2.0
   get_it: ^7.2.0
   grouped_list: ^4.2.0
+  hooks_riverpod: ^2.0.2
   http: ^0.13.4
+  image_picker: ^0.8.6
   intl: ^0.17.0
   shared_preferences: ^2.0.15
 
@@ -25,4 +28,26 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/background.jpg
+    - assets/images/
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Pretendard-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Pretendard-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Pretendard-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Pretendard-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Pretendard-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Pretendard-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Pretendard-Black.ttf
+          weight: 900

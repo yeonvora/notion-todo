@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noti/styles/colors.dart';
-import 'package:noti/styles/sizes.dart';
+import 'package:noti/constants/colors.dart';
+import 'package:noti/constants/sizes.dart';
 import 'package:noti/widgets/common/icon.dart';
 
 class ActionForm extends StatefulWidget {
@@ -102,7 +102,7 @@ class _ActionFormState extends State<ActionForm> {
         // hint text
         hintText: '할 일 추가',
         hintStyle: const TextStyle(color: Colors.white24),
-        // styles
+        // constants
         isDense: true,
         filled: true,
         fillColor: CommonColors.textfield,

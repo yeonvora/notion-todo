@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:noti/styles/sizes.dart';
-import 'package:noti/styles/colors.dart';
+import 'package:noti/constants/sizes.dart';
+import 'package:noti/constants/colors.dart';
 
 export 'package:flutter_remix/flutter_remix.dart';
 

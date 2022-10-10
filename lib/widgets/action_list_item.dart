@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noti/styles/colors.dart';
+import 'package:noti/constants/colors.dart';
 import 'package:noti/widgets/common/icon.dart';
 
 import 'package:noti/widgets/common/text.dart';

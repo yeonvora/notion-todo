@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class CommonColors {
-  static const Color brand = Color(0xFF1C2129);
+  static const Color brand = Color(0xFF2A313D);
 
   static const Color background = Color(0xFF14151A);
 

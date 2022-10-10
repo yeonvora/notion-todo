@@ -1,7 +1,7 @@
 import 'package:noti/utils/get_today.dart';
 import 'package:noti/domain/action_entity.dart';
-import 'package:noti/notion/notion_api.dart';
-import 'package:noti/notion/notion_block.dart';
+import 'package:noti/api/notion_api.dart';
+import 'package:noti/api/notion_block.dart';
 
 /// 노션에 페이지 생성
 ///
@@ -23,15 +23,14 @@ Future<void> synchronizeNotionPage(
       actions.where((_) => _.type == type).map((_) => checkboxBlock(_.name, _.done)).toList();
 
   // [1] 노션 페이지 생성
-  // TODO: 개발 후 활성화하기
-  // await notion.createPage(
-  //   today,
-  //   [
-  //     ...actionBlocks(ActionType.routine, actions),
-  //     dividerBlock(),
-  //     ...actionBlocks(ActionType.task, actions),
-  //   ],
-  // );
+  await notion.createPage(
+    today,
+    [
+      ...actionBlocks(ActionType.routine, actions),
+      dividerBlock(),
+      ...actionBlocks(ActionType.task, actions),
+    ],
+  );
 
   callback?.call();
 }

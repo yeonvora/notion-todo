@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:noti/styles/sizes.dart';
-import 'package:noti/styles/colors.dart';
+import 'package:noti/constants/text.dart';
+import 'package:noti/constants/widget.dart';
+import 'package:noti/constants/sizes.dart';
+import 'package:noti/constants/colors.dart';
 import 'package:noti/utils/get_today.dart';
 import 'package:noti/widgets/common/text.dart';
 
 class TodoAppBar extends StatelessWidget {
-  final String titles;
+  final String? title;
 
-  final String background;
+  final String? background;
 
   final List<Widget>? actions;
 
   const TodoAppBar({
-    required this.titles,
-    required this.background,
+    this.title,
+    this.background,
     this.actions,
   });
 
@@ -23,7 +25,7 @@ class TodoAppBar extends StatelessWidget {
       pinned: true,
       actions: actions,
       elevation: 0,
-      expandedHeight: 240,
+      expandedHeight: kAppBarHeight,
       backgroundColor: Colors.transparent,
       flexibleSpace: FlexibleSpaceBar(
         // collapseMode: CollapseMode.pin,
@@ -43,11 +45,10 @@ class TodoAppBar extends StatelessWidget {
                       0.8,
                     ]),
               ),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(background),
+                  image: AssetImage(kDefaultBackgroundImage),
                   fit: BoxFit.cover,
-                  alignment: const Alignment(0, -0.5),
                 ),
               ),
             ),
@@ -67,7 +68,7 @@ class TodoAppBar extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     TodoText(
-                      titles,
+                      title ?? kDefaultTitle,
                       size: FontSizes.headline,
                       color: FontColors.primary,
                       strong: true,

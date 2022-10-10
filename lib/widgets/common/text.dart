@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:noti/styles/sizes.dart';
-import 'package:noti/styles/colors.dart';
+import 'package:noti/constants/sizes.dart';
+import 'package:noti/constants/colors.dart';
 
 class TodoText extends StatelessWidget {
   final String? text;
@@ -44,7 +44,7 @@ class TodoText extends StatelessWidget {
         height: height,
         fontSize: size,
         color: color,
-        fontWeight: strong! ? FontWeight.bold : null,
+        fontWeight: strong! ? FontWeight.bold : FontWeight.w500,
         fontStyle: italic! ? FontStyle.italic : null,
       ).merge(style),
     );

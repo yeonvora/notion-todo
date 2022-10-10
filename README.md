@@ -13,7 +13,7 @@
 2. 제목 속성 이름을 Date로 변경
 3. [Notion API Guide](https://developers.notion.com/docs/getting-started)에 따라 진행
 4. [Notion Config](./lib/notion/notion_config.exam.dart) 수정
-5. 취향대로 [제목, 배경화면](./lib/styles/brand.dart) 설정
+5. 취향대로 [제목, 배경화면](./lib/constants/brand.dart) 설정
 6. [flutter 설치](https://docs.flutter.dev/get-started) 후 실행
 
 <br/>

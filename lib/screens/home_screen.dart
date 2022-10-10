@@ -4,8 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:noti/domain/action_entity.dart';
 import 'package:noti/domain/action_service.dart';
 import 'package:noti/screens/setting_screen.dart';
-import 'package:noti/styles/brand.dart';
-import 'package:noti/styles/colors.dart';
+import 'package:noti/constants/colors.dart';
 import 'package:noti/utils/show_flash_snack_bar.dart';
 import 'package:noti/utils/synchronize_notion_page.dart';
 import 'package:noti/widgets/action_form.dart';
@@ -95,9 +94,12 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(children: [
           CustomScrollView(slivers: [
-            TodoAppBar(titles: title, background: coverImage, actions: [
-              // _buildSyncButton,
-              IconButton(
+            TodoAppBar(
+              title: null,
+              background: null,
+              actions: [
+                // _buildSyncButton,
+                IconButton(
                   icon: const Icon(
                     FlutterRemix.settings_3_fill,
                     color: Colors.white,
@@ -106,10 +108,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     // Navigate To Settings Page
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (c) => const SettingScreen()),
+                      MaterialPageRoute(builder: (c) => SettingScreen()),
                     );
-                  }),
-            ]),
+                  },
+                ),
+              ],
+            ),
             SliverPadding(
               padding: const EdgeInsets.only(top: 16, bottom: 120),
               sliver: SliverToBoxAdapter(

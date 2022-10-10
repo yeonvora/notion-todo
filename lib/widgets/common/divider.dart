@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noti/styles/colors.dart';
-import 'package:noti/styles/sizes.dart';
+import 'package:noti/constants/colors.dart';
+import 'package:noti/constants/sizes.dart';
 import 'package:noti/widgets/common/text.dart';
 
 class TodoDivider extends StatelessWidget {

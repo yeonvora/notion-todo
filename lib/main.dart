@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:get_it/get_it.dart';
-import 'package:noti/styles/colors.dart';
+import 'package:noti/constants/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:noti/domain/action_repository.dart';
 import 'package:noti/domain/action_service.dart';
@@ -33,6 +33,8 @@ class App extends StatelessWidget {
       title: 'noti',
       home: const HomeScreen(),
       theme: ThemeData(
+        fontFamily: 'Pretendard',
+        brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.white,
