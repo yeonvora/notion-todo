@@ -1,4 +1,4 @@
-![cover](./assets/cover.png)
+![cover](./assets/images/cover.png)
 
 # Noti
 
