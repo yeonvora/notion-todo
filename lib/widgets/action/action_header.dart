@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:noti/constants/text.dart';
 import 'package:noti/constants/widget.dart';
@@ -45,10 +47,12 @@ class ActionHeader extends StatelessWidget {
                       0.8,
                     ]),
               ),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(kDefaultBackgroundImage),
                   fit: BoxFit.cover,
+                  image: background != null
+                      ? FileImage(File(background!))
+                      : const AssetImage(kDefaultBackgroundImage) as ImageProvider,
                 ),
               ),
             ),
@@ -68,7 +72,8 @@ class ActionHeader extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     TodoText(
-                      title ?? kDefaultTitle,
+                      // 제목이 없으면 기본 제목으로 표시
+                      title != '' && title != null ? title : kDefaultTitle,
                       size: FontSizes.headline,
                       color: FontColors.primary,
                       strong: true,

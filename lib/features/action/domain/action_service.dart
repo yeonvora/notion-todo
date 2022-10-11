@@ -65,10 +65,7 @@ class ActionService implements ActionUsecase {
 
   @override
   List<Action> initializeActions() {
-    print('dsadad');
-
     final actions = getActions();
-
     final initialize = actions
         // [Routine]은 상태 초기화
         .map((action) {

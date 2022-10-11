@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:noti/features/action/domain/action_entity.dart';
 import 'package:noti/features/action/domain/action_service.dart';
-import 'package:noti/utils/synchronize_notion_page.dart';
 
 typedef ActionState = List<Action>;
 
@@ -35,13 +34,8 @@ class ActionController extends StateNotifier<ActionState> {
     state = actionUsecase.getActions();
   }
 
-  /// 노션 동기화
-  Future<void> synchronizeAction() async {
-    if (state.isEmpty) return;
-
-    // 완료될 때까지 기다림
-    await Future.wait([createNotionPage(state)]);
-
+  /// 할 일 초기화
+  Future<void> initializeActions() async {
     actionUsecase.initializeActions();
     state = actionUsecase.getActions();
   }

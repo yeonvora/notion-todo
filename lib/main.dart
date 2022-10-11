@@ -12,6 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPrefs = await SharedPreferences.getInstance();
 
+  print('🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡🟡');
+
   runApp(ProviderScope(
     overrides: [sharedPreferencesProvider.overrideWithValue(sharedPrefs)],
     child: const App(),

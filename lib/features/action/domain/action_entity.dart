@@ -2,15 +2,17 @@
 class Action {
   final String type;
 
-  String name;
+  final String name;
 
-  bool done;
+  late final bool done;
 
   Action({
-    required this.type,
-    required this.name,
-    this.done = false,
-  });
+    final String? type,
+    final String? name,
+    final bool? done,
+  })  : type = type ?? ActionType.task,
+        name = name ?? '할 일',
+        done = done ?? false;
 
   void changeStatus() {
     done = !done;

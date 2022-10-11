@@ -7,20 +7,22 @@ class TodoTextField extends StatelessWidget {
 
   final String? labelText;
 
-  const TodoTextField({
+  String? Function(String?)? validator;
+
+  TodoTextField({
     required this.controller,
     this.labelText,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       cursorColor: Colors.white,
       style: const TextStyle(height: 1.5, fontSize: FontSizes.subHeader),
       decoration: InputDecoration(
         focusColor: CommonColors.brand,
-        labelText: labelText,
         labelStyle: const TextStyle(
           color: FontColors.secondary,
           fontWeight: FontWeight.w500,
@@ -28,7 +30,9 @@ class TodoTextField extends StatelessWidget {
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white, width: 1.5),
         ),
+        labelText: labelText,
       ),
+      validator: validator,
     );
   }
 }
