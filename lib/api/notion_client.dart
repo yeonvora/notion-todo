@@ -4,17 +4,17 @@ import 'package:noti/api/notion_config.dart';
 
 /// [Notion API Reference](https://developers.notion.com/reference)
 
-class NotionAPI {
+class NotionClient {
   final String token;
 
   final String databaseId;
 
-  NotionAPI({
+  NotionClient({
     required this.token,
     required this.databaseId,
   });
 
-  static const domain = 'api.notion.com';
+  static const host = 'api.notion.com';
 
   static final header = {
     'Authorization': 'Bearer $NOTION_TOKEN',
@@ -23,7 +23,7 @@ class NotionAPI {
   };
 
   Future<List> getPages(String pageName) async {
-    final uri = Uri.https(domain, '/v1/databases/$NOTION_DATABASE_ID/query');
+    final uri = Uri.https(host, '/v1/databases/$databaseId/query');
 
     final response = await http.post(
       uri,
@@ -45,13 +45,13 @@ class NotionAPI {
   }
 
   Future<void> createPage(String title, List<dynamic> children) async {
-    final uri = Uri.https(domain, '/v1/pages');
+    final uri = Uri.https(host, '/v1/pages');
 
     await http.post(
       uri,
       headers: header,
       body: json.encode({
-        "parent": {"database_id": NOTION_DATABASE_ID},
+        "parent": {"database_id": databaseId},
         "properties": {
           "Date": {
             "title": [
@@ -67,7 +67,7 @@ class NotionAPI {
   }
 
   Future<void> removePage(String pageId) async {
-    final uri = Uri.https(domain, '/v1/pages/$pageId');
+    final uri = Uri.https(host, '/v1/pages/$pageId');
 
     await http.patch(
       uri,

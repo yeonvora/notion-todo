@@ -18,6 +18,9 @@ abstract class ProfileUsecase {
 
   // 제목 수정
   void editTitle(String title);
+
+  // 노션 환경 설정
+  void configNotionKey(NotionKey key);
 }
 
 // Implementation
@@ -45,5 +48,13 @@ class ProfileService implements ProfileUsecase {
     final edited = profile.copyWith(title: title);
 
     _repository.save(edited);
+  }
+
+  @override
+  void configNotionKey(NotionKey key) {
+    final profile = getProfile();
+    final updated = profile.copyWith(key: key);
+
+    _repository.save(updated);
   }
 }

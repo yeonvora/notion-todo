@@ -7,9 +7,9 @@ class TodoTextField extends StatelessWidget {
 
   final String? labelText;
 
-  String? Function(String?)? validator;
+  final String? Function(String?)? validator;
 
-  TodoTextField({
+  const TodoTextField({
     required this.controller,
     this.labelText,
     this.validator,

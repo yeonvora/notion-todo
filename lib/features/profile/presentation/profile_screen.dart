@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:noti/constants/text.dart';
 import 'package:noti/constants/colors.dart';
 import 'package:noti/widgets/_common/text.dart';
-import 'package:noti/features/notion/presentation/notion_config_modal.dart';
+import 'package:noti/features/profile/presentation/notion_config_modal.dart';
 import 'package:noti/widgets/profile/background_picker.dart';
 import 'package:noti/widgets/profile/title_text_field.dart';
 import 'package:noti/features/profile/presentation/profile_controller.dart';
