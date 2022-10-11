@@ -1,7 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:noti/features/profile/data/profile_repository.dart';
+import 'package:noti/notion/notion_general.dart';
 import 'package:noti/utils/get_today.dart';
-import 'package:noti/api/notion_client.dart';
-import 'package:noti/api/notion_block.dart';
+import 'package:noti/notion/notion_client.dart';
+import 'package:noti/notion/notion_block.dart';
 import 'package:noti/features/action/domain/action_entity.dart';
 import 'package:noti/features/profile/domain/profile_entity.dart';
 import 'package:noti/features/profile/domain/profile_service.dart';
@@ -9,9 +11,14 @@ import 'package:noti/features/profile/domain/profile_service.dart';
 typedef NotionState = void;
 
 class NotionController extends StateNotifier<NotionState> {
-  final ProfileUsecase notionUsecase;
+  final NotionKey key;
 
-  NotionController(this.notionUsecase) : super(null);
+  final ProfileUsecase profileUsecase;
+
+  NotionController(
+    this.key,
+    this.profileUsecase,
+  ) : super(null);
 
   /// 노션 환경 설정
   void configNotion(String token, String databaseId) {
@@ -19,42 +26,32 @@ class NotionController extends StateNotifier<NotionState> {
       throw Exception('모두 입력해주세요.');
     }
 
-    notionUsecase.configNotionKey(NotionKey(token: token, databaseId: databaseId));
+    profileUsecase.configNotionKey(NotionKey(token: token, databaseId: databaseId));
   }
 
-  /// 노션에 페이지 생성
+  /// 노션에 페이지 만들기
   Future<void> createNotionPage(List<Action> actions) async {
-    // TODO: 상태값 집어넣기
-    final notion = NotionClient(
-      token: '',
-      databaseId: '',
-    );
-
+    final client = NotionClient(token: key.token, databaseId: key.databaseId);
     final today = getToday('yyyy-MM-dd');
 
-    /// 페이지를 이미 생성한 경우 제거.
-    /// why. 노션은 아직 블록 단위 업데이트를 지원 안함
-    /// 따라서 Action을 추가한 경우 전체 페이지를 업데이트함
-    final pages = await notion.getPages(today);
-    if (pages.isNotEmpty) {
-      await notion.removePage(pages[0]['id'] as String);
-    }
+    // [1] 페이지를 이미 생성한 경우 제거
+    final page = await client.getPage(NotionProperty('Data', today));
+    if (page != null) await client.removePage(page.id);
 
-    // 블록 형식에 맞게 구체화
-    List<dynamic> actionBlocks(String type, List<Action> actions) =>
-        actions.where((_) => _.type == type).map((_) => checkboxBlock(_.name, _.done)).toList();
+    // [2] 노션 페이지 콘텐츠 구성
+    final contents = NotionChildren()
+        .addAll(actions.map((_) => TodoBlock(checked: _.done, text: _.name)).toList());
 
-    await notion.createPage(
-      today,
-      [
-        ...actionBlocks(ActionType.routine, actions),
-        dividerBlock(),
-        ...actionBlocks(ActionType.task, actions),
-      ],
-    );
+    // [3] 노션 페이지 생성
+    await client.createPage(const NotionProperty('Date', '형.. 돼요?'), contents);
   }
 }
 
 final notionControllerProvider = StateNotifierProvider<NotionController, NotionState>((ref) {
-  return NotionController(ref.watch(profileServiceProvider));
+  final profileRepository = ref.watch(profileRepositoryProvider);
+  final profileService = ref.watch(profileServiceProvider);
+
+  final profile = profileRepository.load();
+
+  return NotionController(profile.key, profileService);
 });

@@ -4,7 +4,7 @@ class Action {
 
   final String name;
 
-  late final bool done;
+  bool done;
 
   Action({
     final String? type,

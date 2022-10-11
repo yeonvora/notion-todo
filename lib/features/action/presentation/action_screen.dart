@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:noti/constants/colors.dart';
+import 'package:noti/features/profile/presentation/notion_controller.dart';
 import 'package:noti/features/profile/presentation/profile_controller.dart';
 import 'package:noti/utils/show_flash_snack_bar.dart';
 import 'package:noti/widgets/action/action_form.dart';
@@ -34,16 +35,28 @@ class ActionScreen extends HookConsumerWidget {
               actions: [
                 _buildSyncButton(() async {
                   try {
-                    await ref.read(actionControllerProvider.notifier).initializeActions();
+                    // [1] Notion API가 응답할 때까지 기다림
+                    await Future.wait([
+                      ref.read(notionControllerProvider.notifier).createNotionPage(actions),
+                    ]);
+
+                    // [2-1] 요청에 성공하면 할 일 초기화 및 성공 메세지 표시
+                    ref.read(actionControllerProvider.notifier).initializeActions();
                     showFlashSnackBar(
                       context,
                       snack: FlashBar(content: const Text('노션에 추가되었습니다.')),
                     );
                   } catch (error) {
-                    // TODO: Exception 유형 찾기
+                    var errorMessage = '동기화에 실패했습니다.';
+
+                    if (error.toString() == 'Exception: No databaseId') {
+                      errorMessage = '데이터베이스 아이디를 설정해주세요';
+                    }
+
+                    // [2-2] 요청에 실패하면 오류 메세지 표시
                     showFlashSnackBar(
                       context,
-                      snack: FlashBar(content: const Text('동기화에 실패했습니다.')),
+                      snack: FlashBar(content: Text(errorMessage)),
                     );
                   }
                 }),
