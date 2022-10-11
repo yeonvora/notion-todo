@@ -43,7 +43,7 @@ class NotionController extends StateNotifier<NotionState> {
         .addAll(actions.map((_) => TodoBlock(checked: _.done, text: _.name)).toList());
 
     // [3] 노션 페이지 생성
-    await client.createPage(const NotionProperty('Date', '형.. 돼요?'), contents);
+    await client.createPage(NotionProperty('Date', today), contents);
   }
 }
 
