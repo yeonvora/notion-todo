@@ -4,13 +4,13 @@ class ExceptionMessage {
     String? message;
     switch (status) {
       case 400:
-      case 403:
       case 409:
       case 429:
-        message = "동기화에 실패했어요.";
+        message = "설정에서 Notion API를 확인해주세요.";
         break;
       case 401:
-        message = "설정에서 Notion API를 확인해주세요.";
+      case 403:
+        message = "유효한 토큰이 아니에요.";
         break;
       case 404:
         message = "데이터베이스를 찾을 수 없어요.";

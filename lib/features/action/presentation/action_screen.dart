@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:noti/constants/colors.dart';
 import 'package:noti/features/profile/presentation/notion_controller.dart';
 import 'package:noti/features/profile/presentation/profile_controller.dart';
-import 'package:noti/utils/exception_message.dart';
+import 'package:noti/notion/exception_message.dart';
 import 'package:noti/utils/show_flash_snack_bar.dart';
 import 'package:noti/widgets/action/action_form.dart';
 import 'package:noti/widgets/action/action_list.dart';
