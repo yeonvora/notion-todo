@@ -1,5 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 /// Entity
-class Action {
+class Action extends Equatable {
   final String type;
 
   final String name;
@@ -17,6 +19,13 @@ class Action {
   void changeStatus() {
     done = !done;
   }
+
+  @override
+  List<Object?> get props => [
+        type,
+        name,
+        done,
+      ];
 }
 
 /// Enums

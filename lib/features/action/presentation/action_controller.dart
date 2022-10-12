@@ -18,8 +18,16 @@ class ActionController extends StateNotifier<ActionState> {
 
   /// 할 일 추가
   void addAction(Action action) {
+    final actions = actionUsecase.getActions();
+
+    // 이미 동일한 액션을 추가한 경우 요청 무시
+    final doesActionExists = actions.contains(action);
+    if (doesActionExists) return;
+
     actionUsecase.addAction(action);
-    state = actionUsecase.getActions();
+    actions.add(action);
+
+    state = actions;
   }
 
   /// 할 일 완료
