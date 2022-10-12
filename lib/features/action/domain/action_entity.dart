@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 /// Entity
+// ignore: must_be_immutable
 class Action extends Equatable {
   final String type;
 
@@ -16,16 +17,16 @@ class Action extends Equatable {
         name = name ?? '할 일',
         done = done ?? false;
 
-  void changeStatus() {
-    done = !done;
-  }
-
   @override
   List<Object?> get props => [
         type,
         name,
         done,
       ];
+
+  void changeStatus() {
+    done = !done;
+  }
 }
 
 /// Enums

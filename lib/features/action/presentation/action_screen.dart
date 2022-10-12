@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:noti/constants/colors.dart';
 import 'package:noti/features/profile/presentation/notion_controller.dart';
 import 'package:noti/features/profile/presentation/profile_controller.dart';
+import 'package:noti/utils/exception_message.dart';
 import 'package:noti/utils/show_flash_snack_bar.dart';
 import 'package:noti/widgets/action/action_form.dart';
 import 'package:noti/widgets/action/action_list.dart';
@@ -47,16 +48,12 @@ class ActionScreen extends HookConsumerWidget {
                       snack: FlashBar(content: const Text('노션에 추가되었습니다.')),
                     );
                   } catch (error) {
-                    var errorMessage = '동기화에 실패했습니다.';
-
-                    if (error.toString() == 'Exception: No databaseId') {
-                      errorMessage = '데이터베이스 아이디를 설정해주세요';
-                    }
-
                     // [2-2] 요청에 실패하면 오류 메세지 표시
+                    final match = RegExp(r'(\d+)').firstMatch(error.toString());
+                    final status = int.parse(match![0].toString());
                     showFlashSnackBar(
                       context,
-                      snack: FlashBar(content: Text(errorMessage)),
+                      snack: FlashBar(content: Text(ExceptionMessage.from(status))),
                     );
                   }
                 }),

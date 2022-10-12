@@ -60,7 +60,7 @@ class ActionList extends StatelessWidget {
             child: ActionListItem(
               done: action.done,
               title: action.name,
-              onPressed: () => handleAction(action, onCompleted),
+              onLongPressed: () => handleAction(action, onCompleted),
             ),
           );
         },

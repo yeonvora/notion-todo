@@ -4,41 +4,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:noti/constants/colors.dart';
 import 'package:noti/constants/sizes.dart';
-import 'package:noti/features/profile/presentation/notion_controller.dart';
+import 'package:noti/utils/validation.dart';
 import 'package:noti/utils/show_flash_snack_bar.dart';
-import 'package:noti/widgets/_common/modal_sheet.dart';
 import 'package:noti/widgets/_common/text_field.dart';
+import 'package:noti/widgets/_common/modal_sheet.dart';
+import 'package:noti/features/profile/presentation/notion_controller.dart';
 
 class NotionConfigModal extends HookConsumerWidget {
   const NotionConfigModal();
-
-  String? validateToken(String? value) {
-    if (value == null || value.isEmpty) {
-      return "값을 입력하세요.";
-    }
-
-    final tokenPrefix = RegExp(r'secret');
-    if (tokenPrefix.matchAsPrefix(value) == null) {
-      return '토큰은 "secret"으로 시작합니다.';
-    }
-
-    if (value.length < 50) {
-      return "토큰을 정확히 입력하세요.";
-    }
-
-    return null;
-  }
-
-  String? validateDatabaseId(String? text) {
-    if (text == null || text.isEmpty) {
-      return "값을 입력하세요.";
-    }
-    if (text.length < 32) {
-      return "DB 아이디를 정확히 입력하세요.";
-    }
-
-    return null;
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -78,23 +51,22 @@ class NotionConfigModal extends HookConsumerWidget {
             ),
           ),
           onPressed: () {
-            // validator가 없거나, 검증에 실패하면 요청 무시
-            final isValid = _formKey.currentState?.validate();
-            if (isValid == null && isValid == false) return;
+            // 검증에 성공하면 실행
+            if (_formKey.currentState!.validate()) {
+              // [1] 노션 설정
+              ref
+                  .read(notionControllerProvider.notifier)
+                  .configNotion(tokenController.text, databaseIdController.text);
 
-            // [1] 노션 설정
-            ref
-                .read(notionControllerProvider.notifier)
-                .configNotion(tokenController.text, databaseIdController.text);
+              // [2] 하단 시트 닫음
+              Navigator.pop(context);
 
-            // [2] 하단 시트 닫음
-            Navigator.pop(context);
-
-            // [3] 메세지 알림
-            showFlashSnackBar(
-              context,
-              snack: FlashBar(content: const Text('설정이 완료되었습니다.')),
-            );
+              // [3] 메세지 알림
+              showFlashSnackBar(
+                context,
+                snack: FlashBar(content: const Text('설정이 완료되었습니다.')),
+              );
+            }
           },
           child: const Text('설정하기'),
         ),

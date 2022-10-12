@@ -18,7 +18,7 @@ class NotionProperty {
       };
 }
 
-class NotionObject {
+class NotionPage {
   final String object;
 
   final String id;
@@ -27,7 +27,7 @@ class NotionObject {
 
   final String url;
 
-  const NotionObject({
+  const NotionPage({
     required this.object,
     required this.id,
     required this.archived,

@@ -23,19 +23,24 @@ class NotionController extends StateNotifier<NotionState> {
   /// 노션 환경 설정
   void configNotion(String token, String databaseId) {
     if (token.isEmpty || databaseId.isEmpty) {
-      throw Exception('모두 입력해주세요.');
+      throw Exception('입력해주세요.');
     }
 
-    profileUsecase.configNotionKey(NotionKey(token: token, databaseId: databaseId));
+    state = profileUsecase.configNotionKey(NotionKey(token: token, databaseId: databaseId));
   }
 
   /// 노션에 페이지 만들기
   Future<void> createNotionPage(List<Action> actions) async {
-    final client = NotionClient(token: key.token, databaseId: key.databaseId);
     final today = getToday('yyyy-MM-dd');
 
+    final client = NotionClient(token: key.token, databaseId: key.databaseId);
+    final property = NotionProperty('Date', today);
+
     // [1] 페이지를 이미 생성한 경우 제거
-    final page = await client.getPage(NotionProperty('Data', today));
+    final page = await client.getPage(property).then((res) {
+      if (res.code != null) throw Exception(res.status);
+      return res.page;
+    });
     if (page != null) await client.removePage(page.id);
 
     // [2] 노션 페이지 콘텐츠 구성
@@ -43,7 +48,9 @@ class NotionController extends StateNotifier<NotionState> {
         .addAll(actions.map((_) => TodoBlock(checked: _.done, text: _.name)).toList());
 
     // [3] 노션 페이지 생성
-    await client.createPage(NotionProperty('Date', today), contents);
+    await client.createPage(property, contents).then((res) {
+      if (res.code != null) throw Exception(res.status);
+    });
   }
 }
 
