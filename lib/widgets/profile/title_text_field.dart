@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noti/constants/colors.dart';
-import 'package:noti/constants/sizes.dart';
+import 'package:notion_todo/constants/colors.dart';
+import 'package:notion_todo/constants/sizes.dart';
 
 class TitleTextField extends StatelessWidget {
   final TextEditingController? controller;

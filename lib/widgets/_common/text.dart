@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:noti/constants/sizes.dart';
-import 'package:noti/constants/colors.dart';
+import 'package:notion_todo/constants/sizes.dart';
+import 'package:notion_todo/constants/colors.dart';
 
 class TodoText extends StatelessWidget {
   final String? text;

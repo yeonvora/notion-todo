@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' show Response;
-import 'package:noti/notion/notion_general.dart';
+import 'package:notion_todo/notion/notion_general.dart';
 
 class NotionHttpResponse {
   final String object;

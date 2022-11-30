@@ -1,4 +1,4 @@
-import 'package:noti/notion/notion_block.dart';
+import 'package:notion_todo/notion/notion_block.dart';
 
 class NotionProperty {
   final String title;

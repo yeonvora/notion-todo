@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:noti/features/profile/domain/profile_entity.dart';
-import 'package:noti/features/profile/data/profile_repository.dart';
+import 'package:notion_todo/features/profile/domain/profile_entity.dart';
+import 'package:notion_todo/features/profile/data/profile_repository.dart';
 
 // 🟡 Riverpod Dependency
 final profileServiceProvider = Provider<ProfileUsecase>((ref) {

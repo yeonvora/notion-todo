@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:noti/features/action/domain/action_entity.dart';
+import 'package:notion_todo/features/action/domain/action_entity.dart';
 
 class ActionMapper {
   static String toJson(Action domain) {

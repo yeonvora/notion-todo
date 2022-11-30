@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.noti">
+    package="com.example.notion_todo">
    <uses-permission android:name="android.permission.INTERNET" /> 
    <application
-        android:label="Noti"
+        android:label="Notion Todo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

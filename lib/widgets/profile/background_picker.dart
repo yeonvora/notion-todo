@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:noti/constants/text.dart';
-import 'package:noti/constants/sizes.dart';
-import 'package:noti/constants/widget.dart';
-import 'package:noti/widgets/_common/icon.dart';
+import 'package:notion_todo/constants/text.dart';
+import 'package:notion_todo/constants/sizes.dart';
+import 'package:notion_todo/constants/widget.dart';
+import 'package:notion_todo/widgets/_common/icon.dart';
 
 class BackgroundPicker extends HookWidget {
   final String? image;

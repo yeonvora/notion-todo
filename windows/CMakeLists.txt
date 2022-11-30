@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(noti LANGUAGES CXX)
+project(notion_todo LANGUAGES CXX)
 
-set(BINARY_NAME "noti")
+set(BINARY_NAME "notion_todo")
 
 cmake_policy(SET CMP0063 NEW)
 

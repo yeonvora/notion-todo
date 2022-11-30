@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:noti/notion/notion_response.dart';
-import 'package:noti/notion/notion_general.dart';
+import 'package:notion_todo/notion/notion_response.dart';
+import 'package:notion_todo/notion/notion_general.dart';
 
 /// [Notion API Reference](https://developers.notion.com/reference)
 

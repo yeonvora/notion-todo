@@ -1,6 +1,6 @@
 {
-  "name": "noti",
-  "short_name": "noti",
+  "name": "notion_todo",
+  "short_name": "notion_todo",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

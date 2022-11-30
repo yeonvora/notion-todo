@@ -1,4 +1,4 @@
-package com.example.noti
+package com.example.notion_todo
 
 import io.flutter.embedding.android.FlutterActivity
 

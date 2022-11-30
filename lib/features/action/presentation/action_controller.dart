@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:noti/features/action/domain/action_entity.dart';
-import 'package:noti/features/action/domain/action_service.dart';
+import 'package:notion_todo/features/action/domain/action_entity.dart';
+import 'package:notion_todo/features/action/domain/action_service.dart';
 
 typedef ActionState = List<Action>;
 

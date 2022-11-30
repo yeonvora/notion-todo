@@ -1,12 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:noti/features/profile/data/profile_repository.dart';
-import 'package:noti/notion/notion_general.dart';
-import 'package:noti/utils/get_today.dart';
-import 'package:noti/notion/notion_client.dart';
-import 'package:noti/notion/notion_block.dart';
-import 'package:noti/features/action/domain/action_entity.dart';
-import 'package:noti/features/profile/domain/profile_entity.dart';
-import 'package:noti/features/profile/domain/profile_service.dart';
+import 'package:notion_todo/features/profile/data/profile_repository.dart';
+import 'package:notion_todo/notion/notion_general.dart';
+import 'package:notion_todo/utils/get_today.dart';
+import 'package:notion_todo/notion/notion_client.dart';
+import 'package:notion_todo/notion/notion_block.dart';
+import 'package:notion_todo/features/action/domain/action_entity.dart';
+import 'package:notion_todo/features/profile/domain/profile_entity.dart';
+import 'package:notion_todo/features/profile/domain/profile_service.dart';
 
 typedef NotionState = void;
 

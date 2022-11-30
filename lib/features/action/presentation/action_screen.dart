@@ -2,18 +2,18 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:noti/constants/colors.dart';
-import 'package:noti/features/profile/presentation/notion_controller.dart';
-import 'package:noti/features/profile/presentation/profile_controller.dart';
-import 'package:noti/notion/exception_message.dart';
-import 'package:noti/utils/show_flash_snack_bar.dart';
-import 'package:noti/widgets/action/action_form.dart';
-import 'package:noti/widgets/action/action_list.dart';
-import 'package:noti/widgets/action/action_header.dart';
-import 'package:noti/widgets/_common/icon.dart';
+import 'package:notion_todo/constants/colors.dart';
+import 'package:notion_todo/features/profile/presentation/notion_controller.dart';
+import 'package:notion_todo/features/profile/presentation/profile_controller.dart';
+import 'package:notion_todo/notion/exception_message.dart';
+import 'package:notion_todo/utils/show_flash_snack_bar.dart';
+import 'package:notion_todo/widgets/action/action_form.dart';
+import 'package:notion_todo/widgets/action/action_list.dart';
+import 'package:notion_todo/widgets/action/action_header.dart';
+import 'package:notion_todo/widgets/_common/icon.dart';
 
-import 'package:noti/features/action/domain/action_entity.dart';
-import 'package:noti/features/action/presentation/action_controller.dart';
+import 'package:notion_todo/features/action/domain/action_entity.dart';
+import 'package:notion_todo/features/action/presentation/action_controller.dart';
 
 class ActionScreen extends HookConsumerWidget {
   const ActionScreen();

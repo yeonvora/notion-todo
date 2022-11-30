@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:noti/features/profile/domain/profile_entity.dart';
+import 'package:notion_todo/features/profile/domain/profile_entity.dart';
 
 class ProfileMapper {
   static String toJson(Profile domain) {

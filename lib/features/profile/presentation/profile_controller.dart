@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:noti/features/profile/domain/profile_entity.dart';
-import 'package:noti/features/profile/domain/profile_service.dart';
+import 'package:notion_todo/features/profile/domain/profile_entity.dart';
+import 'package:notion_todo/features/profile/domain/profile_service.dart';
 
 typedef ProfileState = Profile;
 
