@@ -14,9 +14,9 @@ dependencies:
     sdk: flutter
   flutter_hooks: ^0.18.5+1
   flutter_remix: ^0.0.3
-  flutter_slidable: ^1.2.0
+  flutter_slidable: ^2.0.0
   get_it: ^7.2.0
-  grouped_list: ^4.2.0
+  grouped_list: ^5.1.2
   hooks_riverpod: ^2.0.2
   http: ^0.13.4
   image_picker: ^0.8.6
@@ -24,7 +24,7 @@ dependencies:
   shared_preferences: ^2.0.15
 
 dev_dependencies:
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
 
 flutter:
   uses-material-design: true
