@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:notion_todo/constants/text.dart';
 import 'package:notion_todo/constants/sizes.dart';
 import 'package:notion_todo/constants/widget.dart';
-import 'package:notion_todo/widgets/_common/icon.dart';
+import 'package:notion_todo/components/icon.dart';
 
 class BackgroundPicker extends HookWidget {
   final String? image;
@@ -18,8 +18,8 @@ class BackgroundPicker extends HookWidget {
   });
 
   Future<File?> pickBackgroundImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? picked = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? picked = await picker.pickImage(source: ImageSource.gallery);
 
     if (picked == null) return null;
 

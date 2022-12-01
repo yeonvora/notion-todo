@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notion_todo/constants/colors.dart';
-import 'package:notion_todo/widgets/_common/icon.dart';
-
-import 'package:notion_todo/widgets/_common/text.dart';
+import 'package:notion_todo/components/icon.dart';
+import 'package:notion_todo/components/text.dart';
 
 class ActionListItem extends StatelessWidget {
   final bool done;

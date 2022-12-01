@@ -3,8 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:notion_todo/constants/colors.dart';
 
-import 'package:notion_todo/features/action/presentation/action_screen.dart';
-import 'package:notion_todo/features/profile/presentation/profile_screen.dart';
+import 'package:notion_todo/features/action/presentation/screens/action_screen.dart';
+import 'package:notion_todo/features/profile/presentation/screens/profile_screen.dart';
 
 final sharedPreferencesProvider = Provider<SharedPreferences>((_) => throw UnimplementedError());
 

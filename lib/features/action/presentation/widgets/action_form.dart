@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notion_todo/constants/colors.dart';
 import 'package:notion_todo/constants/sizes.dart';
-import 'package:notion_todo/widgets/_common/icon.dart';
+import 'package:notion_todo/components/icon.dart';
 
 class ActionForm extends StatefulWidget {
   final TextEditingController controller;

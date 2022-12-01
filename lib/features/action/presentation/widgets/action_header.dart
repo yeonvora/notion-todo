@@ -6,7 +6,7 @@ import 'package:notion_todo/constants/widget.dart';
 import 'package:notion_todo/constants/sizes.dart';
 import 'package:notion_todo/constants/colors.dart';
 import 'package:notion_todo/utils/get_today.dart';
-import 'package:notion_todo/widgets/_common/text.dart';
+import 'package:notion_todo/components/text.dart';
 
 class ActionHeader extends StatelessWidget {
   final String? title;

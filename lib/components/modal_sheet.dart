@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notion_todo/constants/colors.dart';
 import 'package:notion_todo/constants/sizes.dart';
-import 'package:notion_todo/widgets/_common/text.dart';
+import 'package:notion_todo/components/text.dart';
 
 class ModalSheet extends StatelessWidget {
   final String title;

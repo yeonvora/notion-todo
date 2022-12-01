@@ -3,17 +3,19 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:notion_todo/constants/colors.dart';
-import 'package:notion_todo/features/profile/presentation/notion_controller.dart';
-import 'package:notion_todo/features/profile/presentation/profile_controller.dart';
 import 'package:notion_todo/notion/exception_message.dart';
 import 'package:notion_todo/utils/show_flash_snack_bar.dart';
-import 'package:notion_todo/widgets/action/action_form.dart';
-import 'package:notion_todo/widgets/action/action_list.dart';
-import 'package:notion_todo/widgets/action/action_header.dart';
-import 'package:notion_todo/widgets/_common/icon.dart';
+import 'package:notion_todo/components/icon.dart';
 
 import 'package:notion_todo/features/action/domain/action_entity.dart';
-import 'package:notion_todo/features/action/presentation/action_controller.dart';
+
+import 'package:notion_todo/features/action/presentation/controllers/action_controller.dart';
+import 'package:notion_todo/features/profile/presentation/controllers/notion_controller.dart';
+import 'package:notion_todo/features/profile/presentation/controllers/profile_controller.dart';
+
+import 'package:notion_todo/features/action/presentation/widgets/action_form.dart';
+import 'package:notion_todo/features/action/presentation/widgets/action_list.dart';
+import 'package:notion_todo/features/action/presentation/widgets/action_header.dart';
 
 class ActionScreen extends HookConsumerWidget {
   const ActionScreen();
@@ -39,14 +41,14 @@ class ActionScreen extends HookConsumerWidget {
                     // [1] Notion API가 응답할 때까지 기다림
                     await Future.wait([
                       ref.read(notionControllerProvider.notifier).createNotionPage(actions),
-                    ]);
-
-                    // [2-1] 요청에 성공하면 할 일 초기화 및 성공 메세지 표시
-                    ref.read(actionControllerProvider.notifier).initializeActions();
-                    showFlashSnackBar(
-                      context,
-                      snack: FlashBar(content: const Text('노션에 추가되었습니다.')),
-                    );
+                    ]).then((_) {
+                      // [2-1] 요청에 성공하면 할 일 초기화 및 성공 메세지 표시
+                      ref.read(actionControllerProvider.notifier).initializeActions();
+                      showFlashSnackBar(
+                        context,
+                        snack: FlashBar(content: const Text('노션에 추가되었습니다.')),
+                      );
+                    });
                   } catch (error) {
                     // [2-2] 요청에 실패하면 오류 메세지 표시
                     final match = RegExp(r'(\d+)').firstMatch(error.toString());

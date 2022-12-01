@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:notion_todo/widgets/_common/divider.dart';
-import 'package:notion_todo/widgets/action/action_list_item.dart';
-
+import 'package:notion_todo/components/divider.dart';
 import 'package:notion_todo/features/action/domain/action_entity.dart';
+import 'package:notion_todo/features/action/presentation/widgets/action_list_item.dart';
 
 class ActionList extends StatelessWidget {
   final List<Action> actions;

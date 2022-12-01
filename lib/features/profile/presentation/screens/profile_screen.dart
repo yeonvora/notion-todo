@@ -4,11 +4,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:notion_todo/constants/text.dart';
 import 'package:notion_todo/constants/colors.dart';
-import 'package:notion_todo/widgets/_common/text.dart';
-import 'package:notion_todo/features/profile/presentation/notion_config_modal.dart';
-import 'package:notion_todo/widgets/profile/background_picker.dart';
-import 'package:notion_todo/widgets/profile/title_text_field.dart';
-import 'package:notion_todo/features/profile/presentation/profile_controller.dart';
+import 'package:notion_todo/components/text.dart';
+import 'package:notion_todo/features/profile/presentation/controllers/profile_controller.dart';
+import 'package:notion_todo/features/profile/presentation/screens/notion_config_modal.dart';
+import 'package:notion_todo/features/profile/presentation/widgets/background_picker.dart';
+import 'package:notion_todo/features/profile/presentation/widgets/title_text_field.dart';
 
 class ProfileScreen extends StatefulHookConsumerWidget {
   const ProfileScreen();

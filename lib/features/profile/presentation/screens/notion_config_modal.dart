@@ -6,16 +6,17 @@ import 'package:notion_todo/constants/colors.dart';
 import 'package:notion_todo/constants/sizes.dart';
 import 'package:notion_todo/utils/validation.dart';
 import 'package:notion_todo/utils/show_flash_snack_bar.dart';
-import 'package:notion_todo/widgets/_common/text_field.dart';
-import 'package:notion_todo/widgets/_common/modal_sheet.dart';
-import 'package:notion_todo/features/profile/presentation/notion_controller.dart';
+import 'package:notion_todo/components/text_field.dart';
+import 'package:notion_todo/components/modal_sheet.dart';
+
+import 'package:notion_todo/features/profile/presentation/controllers/notion_controller.dart';
 
 class NotionConfigModal extends HookConsumerWidget {
   const NotionConfigModal();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     final tokenController = useTextEditingController();
     final databaseIdController = useTextEditingController();
 
@@ -23,22 +24,6 @@ class NotionConfigModal extends HookConsumerWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: ModalSheet(
         title: 'Notion API',
-        child: Form(
-          key: _formKey,
-          child: Column(children: [
-            TodoTextField(
-              controller: tokenController,
-              labelText: '토큰',
-              validator: validateToken,
-            ),
-            const SizedBox(height: 16),
-            TodoTextField(
-              controller: databaseIdController,
-              labelText: 'DB 아이디',
-              validator: validateDatabaseId,
-            ),
-          ]),
-        ),
         submit: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 0,
@@ -52,7 +37,7 @@ class NotionConfigModal extends HookConsumerWidget {
           ),
           onPressed: () {
             // 검증에 성공하면 실행
-            if (_formKey.currentState!.validate()) {
+            if (formKey.currentState!.validate()) {
               // [1] 노션 설정
               ref
                   .read(notionControllerProvider.notifier)
@@ -69,6 +54,22 @@ class NotionConfigModal extends HookConsumerWidget {
             }
           },
           child: const Text('설정하기'),
+        ),
+        child: Form(
+          key: formKey,
+          child: Column(children: [
+            TodoTextField(
+              controller: tokenController,
+              labelText: '토큰',
+              validator: validateToken,
+            ),
+            const SizedBox(height: 16),
+            TodoTextField(
+              controller: databaseIdController,
+              labelText: 'DB 아이디',
+              validator: validateDatabaseId,
+            ),
+          ]),
         ),
       ),
     );
