@@ -33,7 +33,7 @@
 
 ### 2. Notion API 설정
 
-2-1. Notion Integrations에서 [새 API 통합 만들기]를 눌러주세요.
+2-1. [Notion Integrations](https://www.notion.so/my-integrations)에서 [새 API 통합 만들기]를 눌러주세요.
 
 ![my-integrations](./assets/guide/b1-my-integrations.png)
 
