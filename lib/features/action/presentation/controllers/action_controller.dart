@@ -21,7 +21,7 @@ class ActionController extends StateNotifier<ActionState> {
     final actions = actionUsecase.getActions();
 
     // 이미 동일한 액션을 추가한 경우 요청 무시
-    final doesActionExists = actions.contains(action);
+    final doesActionExists = actions.any((a) => a.name == action.name);
     if (doesActionExists) return;
 
     actionUsecase.addAction(action);

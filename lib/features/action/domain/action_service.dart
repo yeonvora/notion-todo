@@ -23,7 +23,7 @@ abstract class ActionUsecase {
   void updateAction(Action action);
 
   // 할 일 초기화
-  List<Action> initializeActions();
+  void initializeActions();
 }
 
 // Implementation
@@ -64,7 +64,7 @@ class ActionService implements ActionUsecase {
   }
 
   @override
-  List<Action> initializeActions() {
+  void initializeActions() {
     final actions = getActions();
     final initialize = actions
         // [Routine]은 상태 초기화
@@ -77,7 +77,5 @@ class ActionService implements ActionUsecase {
         .toList();
 
     _repository.save(initialize);
-
-    return initialize;
   }
 }

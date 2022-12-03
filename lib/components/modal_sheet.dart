@@ -22,7 +22,7 @@ class ModalSheet extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
       color: CommonColors.background,
       child: Column(mainAxisSize: MainAxisSize.min, children: [
-        _buildSheetHeader(title),
+        _header,
         child,
         const SizedBox(height: 64),
         if (submit != null) submit!,
@@ -30,7 +30,7 @@ class ModalSheet extends StatelessWidget {
     );
   }
 
-  Widget _buildSheetHeader(String title) {
+  Widget get _header {
     return SizedBox(
       height: 96,
       child: Column(

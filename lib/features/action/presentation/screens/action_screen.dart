@@ -20,6 +20,35 @@ import 'package:notion_todo/features/action/presentation/widgets/action_header.d
 class ActionScreen extends HookConsumerWidget {
   const ActionScreen();
 
+  /// 노션 동기화
+  Future<void> _synchronizeNotion(
+    BuildContext context,
+    WidgetRef ref,
+    List<Action> actions,
+  ) async {
+    try {
+      // 노션에 페이지 생성 후, 할 일 기록
+      await ref.read(notionControllerProvider.notifier).createNotionPage(actions);
+
+      // 할 일 초기화
+      await ref.read(actionControllerProvider.notifier).initializeActions();
+
+      if (!context.mounted) return;
+      showFlashSnackBar(
+        context,
+        snack: FlashBar(content: const Text('노션에 추가되었습니다.')),
+      );
+    } catch (error) {
+      // 요청에 실패하면 오류 메세지 표시
+      final match = RegExp(r'(\d+)').firstMatch(error.toString());
+      final status = int.parse(match![0].toString());
+      showFlashSnackBar(
+        context,
+        snack: FlashBar(content: Text(ExceptionMessage.from(status))),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final actionNameController = useTextEditingController();
@@ -36,30 +65,14 @@ class ActionScreen extends HookConsumerWidget {
               title: profile.title,
               background: profile.image,
               actions: [
-                _buildSyncButton(() async {
-                  try {
-                    // [1] Notion API가 응답할 때까지 기다림
-                    await Future.wait([
-                      ref.read(notionControllerProvider.notifier).createNotionPage(actions),
-                    ]).then((_) {
-                      // [2-1] 요청에 성공하면 할 일 초기화 및 성공 메세지 표시
-                      ref.read(actionControllerProvider.notifier).initializeActions();
-                      showFlashSnackBar(
-                        context,
-                        snack: FlashBar(content: const Text('노션에 추가되었습니다.')),
-                      );
-                    });
-                  } catch (error) {
-                    // [2-2] 요청에 실패하면 오류 메세지 표시
-                    final match = RegExp(r'(\d+)').firstMatch(error.toString());
-                    final status = int.parse(match![0].toString());
-                    showFlashSnackBar(
-                      context,
-                      snack: FlashBar(content: Text(ExceptionMessage.from(status))),
-                    );
-                  }
-                }),
-                _buildSettingsButton(() => Navigator.pushNamed(context, '/profile')),
+                IconButton(
+                  icon: const Icon(FlutterRemix.refresh_line),
+                  onPressed: () => _synchronizeNotion(context, ref, actions),
+                ),
+                IconButton(
+                  icon: const Icon(FlutterRemix.settings_3_fill),
+                  onPressed: () => Navigator.pushNamed(context, '/profile'),
+                ),
               ],
             ),
             SliverPadding(
@@ -93,27 +106,6 @@ class ActionScreen extends HookConsumerWidget {
           ),
         ]),
       ),
-    );
-  }
-
-  Widget _buildSettingsButton(VoidCallback onPressed) {
-    return IconButton(
-      icon: const Icon(
-        FlutterRemix.settings_3_fill,
-        color: Colors.white,
-      ),
-      // Navigate To Settings Page
-      onPressed: onPressed,
-    );
-  }
-
-  Widget _buildSyncButton(VoidCallback onPressed) {
-    return IconButton(
-      icon: const Icon(
-        FlutterRemix.refresh_line,
-        color: Colors.white,
-      ),
-      onPressed: onPressed,
     );
   }
 }

@@ -105,24 +105,3 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 }
-
-// class _ConfirmButton extends StatelessWidget {
-//   const _ConfirmButton();
-//   @override
-//   Widget build(BuildContext context) {
-//     return ElevatedButton(
-//       style: ElevatedButton.styleFrom(
-//         elevation: 0,
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-//         backgroundColor: CommonColors.brand,
-//         minimumSize: const Size.fromHeight(56),
-//         textStyle: const TextStyle(
-//           fontSize: FontSizes.subHeader,
-//           fontWeight: FontWeight.w500,
-//         ),
-//       ),
-//       onPressed: () => Navigator.pop(context),
-//       child: const Text('확인'),
-//     );
-//   }
-// }

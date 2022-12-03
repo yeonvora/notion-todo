@@ -2,13 +2,12 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:notion_todo/constants/colors.dart';
-import 'package:notion_todo/constants/sizes.dart';
 import 'package:notion_todo/utils/validation.dart';
 import 'package:notion_todo/utils/show_flash_snack_bar.dart';
 import 'package:notion_todo/components/text_field.dart';
 import 'package:notion_todo/components/modal_sheet.dart';
 
+import 'package:notion_todo/features/profile/presentation/widgets/submit_button.dart';
 import 'package:notion_todo/features/profile/presentation/controllers/notion_controller.dart';
 
 class NotionConfigModal extends HookConsumerWidget {
@@ -24,17 +23,8 @@ class NotionConfigModal extends HookConsumerWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: ModalSheet(
         title: 'Notion API',
-        submit: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            backgroundColor: CommonColors.brand,
-            minimumSize: const Size.fromHeight(56),
-            textStyle: const TextStyle(
-              fontSize: FontSizes.subHeader,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+        submit: SubmitButton(
+          title: '설정하기',
           onPressed: () {
             // 검증에 성공하면 실행
             if (formKey.currentState!.validate()) {
@@ -53,7 +43,6 @@ class NotionConfigModal extends HookConsumerWidget {
               );
             }
           },
-          child: const Text('설정하기'),
         ),
         child: Form(
           key: formKey,
