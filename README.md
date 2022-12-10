@@ -26,22 +26,23 @@
 
 ### 1. 다운로드
 
-먼저 [Notion Todo 앱](https://github.com/yeonvora/notion-todo/releases/tag/v1.0.0-beta)을 다운로드 해주세요.  
+먼저 [Notion Todo 앱](https://github.com/yeonvora/notion-todo/releases/tag/v1.0.0-beta)을 다운로드 해요.
+
 ![download-app](./assets/guide/a1-download-apk.png)
 
 <br/>
 
 ### 2. Notion API 설정
 
-2-1. [Notion Integrations](https://www.notion.so/my-integrations)에서 [새 API 통합 만들기]를 눌러주세요.
+2-1. [Notion Integrations](https://www.notion.so/my-integrations)에 접속해 로그인한 후, [새 API 통합 만들기]를 누르세요.
 
 ![my-integrations](./assets/guide/b1-my-integrations.png)
 
-2-2. 다음과 같이 설정 후 [제출]을 눌러주세요.
+2-2. 다음과 같이 설정 후 [제출]을 누르세요.
 
 ![create-api](./assets/guide/b2-create-api.png)
 
-2-3. 생성된 API의 Secret Token을 복사하세요.
+2-3. 생성된 API의 `시크릿 토큰`을 복사해요.
 
 ![copy-secret-key](./assets/guide/b3-copy-secret-key.png)
 
@@ -49,14 +50,15 @@
 
 ### 3. 데이터베이스 설정
 
-3-1. [Notion-todo](https://yeonvora.notion.site/fcb5a6d8c4b14367a53054c09628e9f1?v=8e1cc0ebd81140cf94735c6122d0bf5d) 데이터베이스를 자신의 워크스페이스에 복제하세요.
+3-1. [Notion-todo](https://yeonvora.notion.site/fcb5a6d8c4b14367a53054c09628e9f1?v=8e1cc0ebd81140cf94735c6122d0bf5d) 데이터베이스를 자신의 워크스페이스에 복제해요.
+
 ![copy-database](./assets/guide/c1-copy-database.png)
 
-3-2. 복제된 데이터베이스에 방금 생성한 API를 연결하세요.
+3-2. 방금 만든 API를 복제한 데이터베이스에 연결해요.
 
 ![copy-database-id](./assets/guide/c2-connect-my-api.png)
 
-3-3. 데이터베이스의 아이디를 복사하세요.
+3-3. [공유]를 누르고 `데이터베이스 ID` 부분을 복사해요.
 
 ![copy-database-id](./assets/guide/c3-copy-database-id.png)
 
@@ -64,6 +66,6 @@
 
 ### 4. 설정 완료
 
-지금까지 발급받은 `토큰`과 `데이터베이스 아이디`를 붙여넣기해 [설정하기]를 누르면 동기화 설정이 완료됩니다.
+지금까지 발급받은 `시크릿 토큰`과 `데이터베이스 ID`를 입력해 [설정하기]를 누르면 사전 설정이 끝납니다.
 
 ![cover](./assets/guide/a2-setup.png)
