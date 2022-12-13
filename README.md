@@ -17,12 +17,12 @@
 
 ## 사용 방법
 
-```md
-주의 사항
+### 0. 사전 안내
 
-- Android만 지원합니다. (iPhone이 없어서 테스트를 못했습니다.)
-- 설정이 많이 번거롭습니다. (나중에 Notion 로그인을 지원할 생각입니다.)
-```
+- Android만 지원해요. (iOS는 테스트를 못했어요)
+- 노션을 연결하는 과정이 많이 번거로워요.
+
+<br/>
 
 ### 1. 다운로드
 
@@ -50,7 +50,7 @@
 
 ### 3. 데이터베이스 설정
 
-3-1. [Notion-todo](https://yeonvora.notion.site/fcb5a6d8c4b14367a53054c09628e9f1?v=8e1cc0ebd81140cf94735c6122d0bf5d) 데이터베이스를 자신의 워크스페이스에 복제해요.
+3-1. [Notion Todo 데이터베이스](https://yeonvora.notion.site/fcb5a6d8c4b14367a53054c09628e9f1?v=8e1cc0ebd81140cf94735c6122d0bf5d)를 자신의 워크스페이스에 복제해요.
 
 ![copy-database](./assets/guide/c1-copy-database.png)
 
